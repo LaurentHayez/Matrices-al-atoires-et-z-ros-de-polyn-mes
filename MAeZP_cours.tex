@@ -1,0 +1,247 @@
+\documentclass[a4paper, 12pt, usenames, dvipsnames, chapterprefix=true]{scrreprt}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx, wrapfig}
+\usepackage{concrete}
+\usepackage{eulervm}
+\usepackage{fancyhdr}
+\usepackage{color, colortbl}
+\usepackage{xcolor}
+\usepackage{amsmath, amssymb, mathrsfs, amsthm, thmtools, MnSymbol}
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{pgf, pgfplots, tikz, pst-solides3d}
+\usetikzlibrary{cd} %To draw commutative diagrams
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes}
+\usetikzlibrary{lindenmayersystems, arrows.meta}
+\usetikzlibrary{automata}
+\usepackage[chapter]{algorithm}
+\usepackage{algorithmicx, algpseudocode}
+\usepackage{listings}
+\usepackage{multicol, multirow}
+% the following patch corrects a bug for the closing parenthesis  
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\lsthk@SelectCharTable}{%
+  \lst@ifbreaklines\lst@Def{`)}{\lst@breakProcessOther)}\fi}{}{}{}
+\makeatother
+\usepackage{hyperref}
+\usepackage{todonotes}
+\usepackage{makeidx}
+\usepackage[backend=biber, style=alphabetic, sorting=none, bibencoding=utf8]{biblatex}
+\usepackage[inline]{enumitem}
+\usepackage[french]{babel}
+\usepackage{caption, tabu}
+
+
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}} 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Fa}{\F(A)} 
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+\renewcommand{\emph}{\textbf}
+\newcommand{\im}{\mathrm{Im}}
+\newcommand{\rev}[2]{\substack{#1\\\downarrow\\ #2}p}
+\newcommand{\bsalo}{bounded self-adjoint linear operator }
+
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\nul}{nul}
+
+\synctex=1
+
+% ---------------- For Cayley graph of free group ----------------- %
+\newcount\quadrant
+\pgfdeclarelindenmayersystem{cayley}{
+  \rule{A -> B [ R [A] [+A] [-A] ]}
+  \symbol{R}{ \pgflsystemstep=0.5\pgflsystemstep } 
+  \symbol{-}{
+    \pgfmathsetcount\quadrant{Mod(\quadrant+1,4)}
+    \tikzset{rotate=90}
+  }
+  \symbol{+}{
+    \pgfmathsetcount\quadrant{Mod(\quadrant-1,4)}
+    \tikzset{rotate=-90}
+  }
+  \symbol{B}{
+    \draw [dot-cayley] (0,0) -- (\pgflsystemstep,0) 
+       node [font=\scriptsize, midway, 
+         anchor={270-mod(\the\quadrant,2)*90}, inner sep=.5ex] 
+           {\ifcase\quadrant$a$\or$b$\or$a^{-1}$\or$b^{-1}$\fi};
+    \tikzset{xshift=\pgflsystemstep}
+  }
+}
+\tikzset{
+  dot/.tip={Circle[sep=-1.5pt,length=3pt]}, cayley/.tip={Stealth[]dot[]}
+}
+% ------ taken from http://tex.stackexchange.com/questions/222881/cayley-graph-of-free-group-in-tikz ----- %
+
+
+
+%%%%%%%%	Définitions des environnements de théorèmes	%%%%%%%%
+%----- ENVIRONNEMENT POUR LES DÉFINITIONS ----%
+\declaretheoremstyle[
+  spaceabove=0pt, spacebelow=0pt, headfont=\normalfont\bfseries\scshape,
+    notefont=\mdseries, notebraces={(}{)}, headpunct={. }, headindent={},
+    postheadspace={ }, postheadspace=4pt, bodyfont=\normalfont, %qed=$$,
+    mdframed={
+      leftmargin=-5,
+      rightmargin=-5,
+      middlelinewidth=1pt,
+      roundcorner=5pt,
+      middlelinecolor=OliveGreen,
+      innerlinecolor=OliveGreen,
+      outerlinecolor=OliveGreen,
+      % apptotikzsetting={\tikzset{mdfbackground/.append style ={
+      %       shade, left color=OliveGreen!20, right color = OliveGreen!20}}}
+   }
+]{defstyle}
+
+\declaretheorem[style=defstyle, numberwithin=chapter, title=Définition]{defi}
+%________________________________________________________
+
+
+%----- ENVIRONNEMENT POUR LES THEOREMES ----%
+\declaretheoremstyle[
+  spaceabove=0pt, spacebelow=0pt, headfont=\normalfont\bfseries\scshape,
+    notefont=\mdseries, notebraces={(}{)}, headpunct={. }, headindent={},
+    postheadspace={ }, postheadspace=4pt, bodyfont=\normalfont\itshape, %qed=$$,
+    mdframed={
+      leftmargin=-5,
+      rightmargin=-5,
+      middlelinewidth=1pt,
+      roundcorner=5pt,
+      middlelinecolor=OliveGreen,
+      innerlinecolor=OliveGreen,
+      outerlinecolor=OliveGreen,
+      % apptotikzsetting={\tikzset{mdfbackground/.append style ={
+      %       shade, left color=OliveGreen!20, right color = OliveGreen!20}}}
+   }
+]{thmstyle}
+\declaretheorem[style=thmstyle, sibling=defi, title=Théorème]{theo}
+\declaretheorem[style=thmstyle, sibling=defi, title=Corollaire]{cor}
+\declaretheorem[style=thmstyle, sibling=defi, title=Proposition]{prop}
+\declaretheorem[style=thmstyle, sibling=defi, title=Propriétés]{propri}
+\declaretheorem[style=thmstyle, sibling=defi, title=Observation]{obs}
+\declaretheorem[style=thmstyle, sibling=defi, title=Observations]{obss}
+\declaretheorem[style=thmstyle, sibling=defi, title=Lemme]{lem}
+\declaretheorem[style=thmstyle, sibling=defi, title=Conséquence]{conseq}
+\declaretheorem[style=thmstyle, sibling=defi, title=Conséquences]{conseqs}
+%_________________________________________________________
+
+%----- ENVIRONNEMENT POUR LES PREUVES ----%
+\declaretheoremstyle[
+  spaceabove=0pt, spacebelow=0pt, headfont=\normalfont\bfseries\scshape,
+    notefont=\mdseries, notebraces={(}{)}, headpunct={. }, headindent={},
+    postheadspace={ }, postheadspace=4pt, bodyfont=\normalfont, 
+    mdframed={
+      leftmargin=15,
+      rightmargin=15,
+      hidealllines=true,
+      font=\small
+   }
+]{preuvestyle}
+
+\declaretheorem[style=preuvestyle, numbered = no, title=Preuve, qed=\textcolor{OliveGreen!80}{\qedsymbol}]{preuve}
+\declaretheorem[style=preuvestyle, numberwithin=chapter, title=Solution de l'exercice, qed=\textcolor{OliveGreen!80}{\qedsymbol}]{solution}
+\declaretheorem[style=preuvestyle, title=Exercice, numberwithin=chapter, qed=\textcolor{OliveGreen!80}{$\spadesuit$}]{exercice}
+\declaretheorem[style=preuvestyle, sibling=defi, title=Remarque, qed = \textcolor{OliveGreen!80}{$\clubsuit$}]{rem}
+\declaretheorem[style=preuvestyle, sibling=defi, title=Remarques, qed = \textcolor{OliveGreen!80}{$\clubsuit$}]{rems}
+%________________________________________________________
+%----- ENVIRONNEMENT POUR LES EXEMPLES ----%
+\declaretheoremstyle[
+  spaceabove=0pt, spacebelow=0pt, headfont=\normalfont\bfseries\scshape,
+    notefont=\mdseries, notebraces={(}{)}, headpunct={. }, headindent={},
+    postheadspace={ }, postheadspace=4pt, bodyfont=\normalfont, qed=\textcolor{OliveGreen!80}{$\bigstar$},
+    mdframed={
+      leftmargin=15,
+      rightmargin=15,
+      font=\small,
+      outerlinewidth=1pt,
+      innerlinewidth=1pt,
+      middlelinewidth=1pt,
+      hidealllines=true, leftline=true,
+      innerlinecolor=OliveGreen!80,
+      outerlinecolor=OliveGreen!80,
+      middlelinecolor=White,
+   }
+]{exstyle}
+
+\declaretheorem[style=exstyle, numberlike=defi, title=Exemple]{ex}
+\declaretheorem[style=exstyle, numberlike=defi, title=Exemples]{exs}
+%________________________________________________________
+
+% Add only one number to align* environment
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\addtokomafont{disposition}{\normalfont\bfseries}
+
+\title{\normalfont{\bfseries{Matrices aléatoires et zéros de polynômes:\\ Notes de cours}}}
+\author{Enseignant: Alain \textsc{Valette}, Scribe: Laurent \textsc{Hayez}}
+\date{Année 2018-2019, semestre de printemps\\ Dernière modification: \today}
+
+
+\makeindex
+
+\begin{document}
+
+
+\renewcommand{\labelitemi}{\textbullet}
+
+\tikzset{math3d/.style=
+{x= {(-0.353cm,-0.353cm)}, y={(1cm,0cm)}, z={(0cm,1cm)}}}
+
+
+\maketitle
+
+
+%Table of contents
+\tableofcontents
+
+% Chapter 0:
+\input{Chapters/MAeZP_chap0.tex}
+
+% Chapter 1:
+\input{Chapters/MAeZP_chap1.tex}
+
+% Chapter 2: 
+\input{Chapters/MAeZP_chap2.tex}
+
+% % Chapter 4: Propriétés du groupe libre
+% \input{Chapters/GAC_cours-chap4.tex}
+
+% % Chapter 5: Introduction à la topologie algébrique
+% \input{Chapters/GAC_cours-chap5.tex}
+
+% % Chapter 6: Transformations de Tietze
+% \input{Chapters/GAC_cours-chap6.tex}
+
+% % Chapter 7: Graphes de Cayley
+% \input{Chapters/GAC_cours-chap7.tex}
+
+% % Chapter 8: Propriétés géométriques
+% \input{Chapters/GAC_cours-chap8.tex}
+
+% % Chapter 8: Croissance et langages formels
+% \input{Chapters/GAC_cours-chap9.tex}
+
+
+\printindex
+
+
+\appendix
+	
+\end{document}
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t 
+%%% End:
