@@ -8,7 +8,27 @@
 
 \chapter{Résumé}
 
-Insérer schema
+\begin{center}
+  \begin{tikzpicture}[scale=0.8]
+    \node[cloud, draw, cloud puffs=10, cloud puff arc=120, aspect=1, inner ysep=1em, text width=2cm, text
+    centered, ForestGreen] (1) at (0,0){Dirac\\ Mécanique quantique};
+    \node[draw, text width = 5cm, text centered] (2) at (12,0) {Problème de \textsc{Kadison-Singer}, 1959\\
+      Analyse fonctionnelle};
+    \node[draw, text width = 5cm, text centered] (3) at (12,-5) {Traduction en algèbre linéaire (1970-2002)};
+    \node[draw, text width = 5cm, text centered] (4) at (6,-10) {Résolution en 2013 par 3 informaticiens
+      (algèbre linéaire + calcul à plusieurs variables + probabilités élémentaires)};
+
+    \node[draw, text width = 5cm, text centered] (5) at (0,-15) {Problèmes de théorie des graphes};
+    \node[draw, text width = 5cm, text centered] (6) at (12,-15) {Problèmes d'informatique théorique \og
+      problème du voyageur de commerce\fg{}};
+
+    \draw[->,>=latex, line width=0.7pt] (1.east) -- (2.west);
+    \draw[->,>=latex, line width=0.7pt] (2.south) -- (3.north);
+    \draw[->,>=latex, line width=0.7pt] (3.west) -| (4.north);
+    \draw[->,>=latex, line width=0.7pt] (4.east) -| (6.north);
+    \draw[->,>=latex, line width=0.7pt] (4.west) -| (5.north) node[midway, above right]{Méthode};
+  \end{tikzpicture}
+\end{center}
 
 
 

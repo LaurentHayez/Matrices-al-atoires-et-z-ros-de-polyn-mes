@@ -199,7 +199,20 @@ Si $T \in \bh$, $T^\ast \in \bh$ est défini par
       extrême}extrême} dans $K$ si $x$ n'est pas intérieur à un segment contenu dans $K$, c'est-à-dire si $x =
   tx_1 + (1-t)x_2$ avec $0 < t < 1$, $x_1, x_2 \in K$, alors $x = x_1 = x_2$.
 
-  insérer fig1.
+  \begin{center}
+    \begin{tikzpicture}
+      \node[red] (A) at (0,0) {$\bullet$};
+      \node[red] (B) at (3, -2) {$\bullet$};
+      \node[red] (C) at (-2, -3) {$\bullet$};
+      \draw (A.center) -- (B.center) -- (C.center) -- (A.center);
+      \draw (A) node[red]{$\bullet$};
+      \draw (B) node[red]{$\bullet$};
+      \draw (C) node[red]{$\bullet$};
+      \draw[ForestGreen, line width=0.7pt] (0, -2) -- (1, -1.5) node[midway]{$\bullet$};
+      \draw[ForestGreen, line width=0.7pt] (-1, -1.5) -- (-0.5, -0.75) node[midway]{$\bullet$};
+      \draw (8, -1.5) node{\textcolor{red}{$\bullet$} = points extrêmes};
+    \end{tikzpicture}
+  \end{center}
 
   Un point extrême de $S(A)$ est
   appelé un \emph{\index{état pur}état pur}.
@@ -209,7 +222,7 @@ Si $T \in \bh$, $T^\ast \in \bh$ est défini par
   \begin{enumerate}
   \item On montre que tout état vectoriel de $\bh$ est pur. On verra qu'il y a des états purs non vectoriels.
   \item Soit $A = C(X)$, alors $S(A)$ s'identifie avec $\mathrm{Prob}(X)$ l'espace des mesures de probabilités
-    sur $X$ (un des théorèmes de représentation de \textsc{Riesz}).
+    sur $X$ (un des théorèmes de représentation de \textsc{Riesz}). \qedhere
   \end{enumerate}
 \end{exs}
 
