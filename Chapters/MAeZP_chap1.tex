@@ -236,8 +236,67 @@ $\delta_x$, définie par (pour $A \subset X$)
 \]
 
 
+{\LARGE Manque le cours du 28 février}
 
+Problème: un état pur sur une MASA a-t-il une extension unique à $\bh$?
 
+Le résultat principal de Kadison \& Singer (1959) est le théorème suivant, qu'on admet.
+
+\begin{theo}
+  Pour la MASA diffuse $L^{\infty}[0,1]$, la réponse est non.
+\end{theo}
+
+L'article laisse ouvert le cas de la MASA discrète $\ell^\infty(\N)$.
+
+\paragraph{\index{Problème de Kadison\&Singer}Problème de Kadison\&Singer:} la MASA $\ell^\infty(\N)$ a-t-elle l'extension unique des états purs?
+
+Kadison \& Singer inclinent à penser que la réponse doit être non (en fait c'est oui).
+
+\begin{prop}
+  Pour $k \in \N$, notons $\phi_k$ l'état pur de $\ell^\infty(\N)$ donné par $\phi_k(\underbrace{(a_n)_{n >
+      0}}_{\in \ell^\infty(\N)}) = a_k$. Alors l'extension unique de $\phi_k$ à $\B(\ell^2(\N))$ est 
+  \[ T \mapsto \left \langle T e_k\, ,\, e_k \right \rangle = T_{kk}. \]
+\end{prop}
+
+\begin{preuve}
+  \begin{enumerate}
+  \item Si $\psi$ est un état pur non vectoriel de $\bh$, alors $\psi$ est nul sur l'espace des opérateurs
+    compacts (en particulier sur l'espace des opérateurs de rang fini). Ici, 
+    \[ p_k = (0, \ldots, 0, \underbrace{1}_{k\text{-ème}}, 0, 0, \ldots) \in \ell^\infty(\N) \]
+    et ainsi on a $\phi_k(p_k) = 1$. Donc une extension de $\phi_k$ à $\B(\ell^2(\N))$ est un état vectoriel,
+    disons 
+    \[ T \mapsto \left \langle T \xi\, ,\, \xi \right \rangle ,\ \|\xi\| = 1. \]
+    
+  \item À voir: $\xi = \lambda e_k$ avec $|\lambda| = 1$ (où $e_k$ est $p_k$ mais vu dans $\ell^2(\N)$ (on le
+    voit une fois comme matrice diagonale, et une fois comme suite)). Si $T = (a_n)_{n > 0}$, 
+    \[ \left \langle T \xi\, ,\, \xi \right \rangle = \sum_{n = 1}^{\infty} a_n |\xi_n|^2. \]
+    Mais $T \xi = \phi_k(T) = a_k$. Ainsi, 
+    \[ \sum_{n\neq k}^{}a_n |\xi_n|^2 + a_k(|\xi_k|^2 - 1) = 0\ \forall (a_n)_{n > 0} \in \ell^\infty(\N). \]
+    Donc $\xi_n = 0$ si $n \neq k$; $|\xi_k| = 1$ et donc $\xi = \lambda e_k$, $|\lambda| = 1$.
+  \end{enumerate}
+\end{preuve}
+
+\begin{defi}
+  L'\index{application diagonale }application diagonale 
+  \[ \mathrm{diag} \colon \B(\ell^2(\N)) \to \ell^\infty(\N),\ T \mapsto (T_{nn})_{n > 0} \]
+  Intuition: on a un tableau carré, et on garde seulement la diagonale.
+\end{defi}
+
+\begin{exs}
+  \begin{itemize}
+    
+  \item $\mathrm{diag}(\mathbbm{1}) = (1, 1, \ldots)$
+  \item Si $T \geq 0$, $\mathrm{diag}(T) = \left( \underbrace{\left \langle Te_n\, ,\, e_n \right
+        \rangle}_{\geq 0}  \right)_{n > 0}$.
+  \end{itemize}
+\end{exs}
+
+Si $\phi$ est un état sur $\ell^\infty(\N)$, alors $\phi \circ \mathrm{diag}$ est un état sur $\B(\ell^2(\N))$
+qui étend $\phi$. Ceci veut dire que pour étendre $\phi$ à $\B(\ell^2(\N))$, on n'a pas besoin du théorème de
+Hahn-Banach. Grâce à cette observation, le problème de Kadison-Singer se reformule de la façon suivante.
+
+\paragraph{\index{Problème de Kadison\&Singer}Problème de KS:} Si $\phi$ est un état pur de $\ell^\infty(\N)$, alors $\phi \circ \mathrm{diag}$
+est l'unique extension de $\phi$ à $\B(\ell^2(\N))$.
 
 
 
