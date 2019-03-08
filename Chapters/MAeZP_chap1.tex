@@ -236,7 +236,33 @@ $\delta_x$, définie par (pour $A \subset X$)
 \]
 
 
-{\LARGE Manque le cours du 28 février}
+\begin{theo}[\textsc{Krein-Milman}]
+  Soit $K$ un convexe compact non vide dans un espace vectoriel topologique sur $\R$ ou $\C$. Alors $K$ est
+  l'enveloppe convexe \emph{fermée} de ses points extrêmes 
+  \[ K = \overline{\mathrm{conv(ext}(K))},\quad \mathrm{ext}K = \{\text{points extrêmes de } K\}. \]
+\end{theo}
+
+Sur $A^\ast$, on a la topologie faible $\ast$: $\phi_i \xrightarrow{i \to \infty} \phi$ si pour tout $x \in
+A$, $\phi_i(x) = \phi(x)$.
+
+\begin{theo}[\textsc{Banach-Alaoglu}]
+  La boule unité de $A^\ast$ est compacte pour la topologie faible $\ast$.
+\end{theo}
+
+On a vu que $S(A)$ est contenu dans la boule unité de $A^\ast$, 
+\[ S(A) = \{\phi \in A^\ast \text{ tq } \phi(\un) = 1,\ \phi(T^\ast T) \geq 0\ \forall T \in A\}, \]
+donc $S(A)$ est fermé pour la topologie faible $\ast$, ainsi $S(A)$ est convexe et compact. Par Krein-Milman,
+$S(A) = \overline{\mathrm{conv}(\mathrm{ext}(S(A)))}$.
+
+Si $\phi \in S(A)$, une version du théorème de Hahn-Banach dit que $\phi$ s'étend en au moins un état sur $\bh
+\supset A$.
+
+Soit $K_\phi = \{\psi \in S(\bh) \colon \psi \big|_{A} = \phi\}$ l'ensemble des états de $\bh$ qui étendent
+$\phi$. Alors $K_\phi$ est convexe et faible $\ast$-fermé.
+
+cf. pages d'Alain pour la suite du cours du 28 février
+
+
 
 Problème: un état pur sur une MASA a-t-il une extension unique à $\bh$?
 

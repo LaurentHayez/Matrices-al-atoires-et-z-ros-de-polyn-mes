@@ -32,7 +32,23 @@ Il y a une bijection entre les projecteurs diagonaux et les parties de $\N$. Ain
 signifie qu'on partitionne $\N$ en $r$ parties. Les $Q_1, \ldots, Q_r$ donnent une décomposition de
 $\ell^2(\N)$ en $r$ blocs
 
-//Insérer figure matrice ici
+\begin{center}
+  \begin{tikzpicture}[xscale=1.3]
+    % \draw[gray!70, opacity=0.5, dashed] (-1,1) grid (6, -7);  % help grid
+    \draw (0,0) node {$Q_1 T Q_1$};
+    \draw (2, -2) node {$Q_2 T Q_2$};
+    \draw (6, -6) node {$Q_r T Q_r$};
+    \draw (2, 0) node{$\ast$};
+    \draw (0, -2) node{$\ast$};
+    \draw (-2, 0) node{\textcolor{ForestGreen}{$Q_1$}};
+    \draw (-2, -2) node{\textcolor{ForestGreen}{$Q_2$}};
+    \draw (-2, -6) node{\textcolor{ForestGreen}{$Q_r$}};
+    \draw (0, 1)  -| (-1, -7) -- (0, -7);
+    \draw (6, 1)  -| (7, -7) -- (6, -7);
+    \draw[ForestGreen] (1, 1) -- (1, -3) -- (5, -3) -- (5, -7);
+    \draw[ForestGreen] (-1, -1) -- (3, -1) -- (3, -5) -- (7, -5);
+  \end{tikzpicture}
+\end{center}
 
 La conjecture dit que la condition $\mathrm{diag}T = 0$ implique que les blocs sont de norme petite.
 
@@ -40,7 +56,15 @@ La conjecture dit que la condition $\mathrm{diag}T = 0$ implique que les blocs s
 Soit $S: \ell^2(\N) \to \ell^2(\N)$ l'\index{opérateur de décalage unilatéral}opérateur de décalage
   unilatéral (\og unilateral shift\fg{}) défini par $Se_n = e_{n+1}$ ou
   $S(a_1, a_2, \ldots) = (0, a_1, a_2, \ldots)$. Alors
-  \[ S = \text{insert matrix here} \] On prend la partition de $\N = (2\N) \cup (2\N + 1)$. Soit $Q_1$ la
+  \[ S =
+    \begin{pmatrix}
+      0 &   &        &   & \\
+      1 & 0 &        &   & \\
+        & 1 & 0 &   & \\
+        &   & \ddots & \ddots  & \\
+        &   &        & 1 & 0
+    \end{pmatrix}
+\] On prend la partition de $\N = (2\N) \cup (2\N + 1)$. Soit $Q_1$ la
   projection sur $\ell^2(2\N)$ et $Q_2$ la projection sur $\ell^2 (2\N + 1)$. Alors 
   \[ S =
     \begin{pmatrix}
