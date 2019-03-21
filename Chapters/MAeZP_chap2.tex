@@ -133,6 +133,7 @@ Soit $S: \ell^2(\N) \to \ell^2(\N)$ l'\index{opérateur de décalage unilatéral
 (Approche de Terry \textsc{Tao}, 2013)
 
 \begin{conj}[\index{conjecture de \textsc{Weaver}}conjecture de \textsc{Weaver}]
+  \label{conj:conjecture-weaver}
   On fixe des entiers $d, m, r \geq 2$ et une constante $c > 0$. Soient $A_1, \ldots, A_d \in M_m(\C)$, $A_i
   \geq 0$, $\mathrm{rang}(A_i) = 1$ avec $\|A_i\| \leq C$ pour tout $i = 1, \ldots d$ et 
   \[ \sum_{i = 1}^{d}A_i = \mathbbm{1}_m. \]
@@ -164,6 +165,150 @@ $A_i$ soient d'images \textit{quasiment} orthogonales.
 \begin{prop}
   La conjecture de \textsc{Weaver} implique la conjecture de pavage.
 \end{prop}
+
+
+
+{\LARGE Manque le cours du 14 mars}
+
+
+\section{Matrices aléatoires}
+\label{sec:matrices-aleatoires}
+
+Référence classique: M.L. \textsc{Mehta}, Random matrices, Academic Press 1991.
+
+\begin{defi}
+  Une \emph{\index{matrice aléatoire}matrice aléatoire} est un tableau carré 
+  \[ \begin{pmatrix}
+      X_{11} & X_{12} & \cdots & X_{1n} \\
+      \vdots & \vdots & & \vdots  \\
+      X_{n1} & X_{n2} & \cdots & X_{nn}
+    \end{pmatrix} \]
+  où les $X_{ij}$ sont des variables aléatoires indépendantes à valeurs complexes.
+
+  Le \index{polynôme caractéristique}polynôme caractéristique 
+  \[ p_X(z) := \det(z \un_n - X) \]
+  est un polynôme aléatoire et les valeurs propres sont des variables aléatoires au sens ordinaire.
+\end{defi}
+
+Typiquement, la théorie s'intéresse au comportement des valeurs propres pour $n \to \infty$.
+
+
+\begin{ex}
+Un modèle très simple: on choisit au hasard un nombre dans $\{1, \ldots, n\}$ (avec probabilité $1/n$), si le
+résultat est $i$, on choisit le projecteur sur le $i$-ème vecteur de la base canonique de $\C^n$.
+\end{ex}
+
+\paragraph{Historique:} Eugene \textsc{Wigner} (1902 - 1995), physicien hongrois naturalisé américain, prix
+Nobel en physique en 1963 pour ses travaux sur théoriques sur la structure des noyaux atomiques. À la fin des
+années 1940, il propose l'hypothèse: pour modéliser un gros noyau d'uranium (par exemple $U^{239}$) au niveau
+quantique, il faut s'intéresser au spectre d'une grosse matrice aléatoire $X$, auto-adjointe
+(i.e. $\overline{X_{ij}} = X_{ji}$) où les $X_{ij}$ sont des variables gaussiennes iid.
+
+
+\paragraph{Théorèmes de MSS:} voir photocopie.
+
+Si $A$ est une matrice, on définit l'\index{espérance}espérance de $A$ par 
+\[ \E[A] = \sum_{i}^{} p_i X_i \]
+où les $X_i$ sont les valeurs possibles de $A$. Pour une loi continue, on aurait $(X, \mathcal{B}, \mu)
+\xrightarrow{A} M_m(\C)$, on a 
+\[ \E[A] = \int_X A(\omega) d\mu(\omega) \in M_m(\C). \]
+
+\begin{preuve}[preuve fausse du théorème 1, mais inspirante]
+  On a 
+  \[ (\E[p_A])(z) = \E(\det(z \un_m - A)) = \det(z \un_m - \E[A]) = \det((z - 1)\un_m) = (z - 1)^m. \]
+\end{preuve}
+
+On a $\|A\|$ est la plus grande valeur propre de $A$ (car $A \geq 0$) est aussi la plus grande racine de $p_A$. Le théorème 2 se reformule de la
+façon suivante.
+
+\begin{theo}
+  Pour au moins une réalisation des $A_i$, la plus grande racine de $p_A$ est inférieure à la plus grande
+  racine de $\E[p_A]$.
+\end{theo}
+
+
+C'est une version non linéaire d'un principe de probabilité: si $X$ est une variable aléatoire à valeurs
+réelles, alors pour au moins une réalisation, $X \leq \E[X]$.
+
+
+\begin{prop}
+  Les théorèmes 1 et 2 de MSS impliquent la conjecture de \textsc{Weaver} \ref{conj:conjecture-weaver}.
+\end{prop}
+
+\begin{preuve}
+  Soient $A_1, \ldots, A_d \in M_m(\C)$ telles que 
+  \[ \sum_{i = 1}^{d}A_i = \un_m, \]
+  et $A_i \geq 0$ de rang 1, avec $\|A_i\| \leq C$.
+
+  Pour $i  =1, \ldots, d$, on définit une variable aléatoire $\tilde{A_i}$ à valeurs dans $M_{mr}(\C)$, on
+  écrit 
+  \[ \C^{mr} = \C \oplus \C^m \oplus \cdots \oplus \C^m. \]
+  On choisit $j \in \{1, 2, \ldots, r\}$ avec probabilité $\frac{1}{r}$ et on place $r A_i$ dans le $j$-ème
+  facteur, i.e. le bloc $jj$ de la matrice $\tilde{A_i}$ vaut $rA_i$, et les autres blocs valent
+  0. $\tilde{A_i}$ est une variable aléatoire à valeurs dans les opérateurs positifs de rang 1 dans
+  $M_{mr}(\C)$. On pose 
+  \[ \tilde{A} = \sum_{i = 1}^{d} \tilde{A_i}. \]
+  On veut appliquer les théorèmes 1 et 2 de MSS à $\tilde{A}$. Vérifions l'hypothèse du théorème 1. On a 
+  \begin{align*}
+    \E[\tilde{A}]
+    &= \sum_{i = 1}^{d} \E[\tilde{A_i}] \\
+    &= \sum_{i = 1}^{d} \frac{1}{r} \sum_{j = 1}^{r}
+    \begin{pmatrix}
+      0 &        &    & && \\
+        & \ddots & & && \\
+        &        & 0 &      & && \\
+        &        &   & rA_i & & &\\
+        &        &   &      & 0 & & \\
+        &        &   &      &   & \ddots & \\
+        &        &   &      &   &        & 0     
+      \end{pmatrix}\\
+    &= \sum_{j = 1}^{r} \sum_{i = 1}^{d}
+      \begin{pmatrix}
+      0 &        &    & && \\
+        & \ddots & & && \\
+        &        & 0 &      & && \\
+        &        &   & A_i & & &\\
+        &        &   &      & 0 & & \\
+        &        &   &      &   & \ddots & \\
+        &        &   &      &   &        & 0  
+      \end{pmatrix}\\
+    &= \sum_{j = 1}^{r}
+      \begin{pmatrix}
+      0 &        &    & && \\
+        & \ddots & & && \\
+        &        & 0 &      & && \\
+        &        &   & \un_m & & &\\
+        &        &   &      & 0 & & \\
+        &        &   &      &   & \ddots & \\
+        &        &   &      &   &        & 0
+      \end{pmatrix}\\
+    &= \begin{pmatrix}
+      \un_m &        &    & && \\
+        & \ddots & & && \\
+        &        & \un_m &      & && \\
+        &        &   & \un_m & & &\\
+        &        &   &      & \un_m & & \\
+        &        &   &      &   & \ddots & \\
+        &        &   &      &   &        & \un_m
+      \end{pmatrix}\\
+    &= \un_{mr}.
+  \end{align*}
+  De plus, $\|\tilde{A_i}\| = r \|A_i\| \leq rC$. Par les théorèmes 1 et 2, pour au moins une réalisation des
+  $\tilde{A_i}$, on a 
+  \[ \|\tilde{A}\| \leq \text{plus grande racine de } \E[p_{\tilde{A}}] \leq (1 + \sqrt{rC})^2. \]
+  La partition $\{S_1, \ldots, S_r\}$ de $\{1, 2, \ldots, d\}$ est associée à cette réalisation, 
+  \[ S_j = \left\{ i \in \{1, 2, \ldots, d\} \cdot j \text{ a été choisi au $i$-ème essai}\right\}. \]
+  Alors 
+  \[ r \left\| \sum_{i \in S_j}^{}A_i \right\| = \left\| \sum_{i \in S_j}^{} \tilde{A_j} \right\| \leq
+    \left\| \sum_{i = 1}^{d} \tilde{A_i}\right\| = \|\tilde{A}\| \leq (1 + \sqrt{rc})^2. \]
+  On divise par $r$, et on obtient 
+  \[ \left\| \sum_{i \in S_j}^{}A_i \right\| \leq \left( \sqrt{\frac{1}{r}} + \sqrt{C}\right)^2. \]
+\end{preuve}
+
+
+
+
+
 
 
 

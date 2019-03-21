@@ -1,0 +1,60 @@
+%-----------------------------------------------------------------------%
+%______//------ Matrices aléatoires et zéros de polynômes ------\\______%
+%______||------                Chapitre 3                ------||______%
+%______\\------  ------//______%
+%-----------------------------------------------------------------------%
+
+\chapter{Preuves des théorèmes 1 et 2}
+
+\section{Polynômes réels stables}
+
+Notons $\HH = \{z \in \C \colon \im z > 0\}$ le demi-plan supérieur de $\C$.
+
+\begin{defi}
+  Un polynômes en $d$ variables $p(z_1, \ldots, z_d)$ est \emph{\index{polynôme réel stable}réel stable} si
+  \begin{itemize}
+  \item ses coefficients sont réels;
+  \item $p$ n'admet aucun zéro dans $\HH^d$.
+  \end{itemize}
+
+\end{defi}
+
+\begin{ex}
+  Pour $d = 1$, $p(z)$ est réel stables si et seulement si ses coefficients sont réels et tous les zéros de
+  $p$ sont réels.
+\end{ex}
+
+\begin{prop}
+  \label{prop:1}
+  Soient $A_1, \ldots, A_d \geq 0$ dans $M_m(\C)$. Alors 
+  \[ q(z, z_1, \ldots, z_d) := \det\left( z \un_m + \sum_{i = 1}^{d} z_i A_i \right) \]
+  est réel stable.
+\end{prop}
+
+\begin{preuve}
+  On a 
+  \[ q(\overline{z}, \overline{z_1}, \ldots, \overline{z_d}) = \overline{q(z, z_1, \ldots, z_d)} \]
+  car $A_i = A_i^\ast$ (i.e. les matrices sont auto-adjointes), donc les coefficients de $q$ sont réels.
+
+  Si $q(z, z_1, \ldots, z_d) = 0$, alors $\det \left( z \un_m + \sum_{i = 1}^{d}z_i A_i\right) = 0$. Ainsi la
+  matrice $z \un_m + \sum_{i = 1}^{d} z_i A_i$ n'est pas inversible, et donc le noyau n'est pas vide, i.e. il
+  existe $v \in \C^m$ non nul avec $zv + \sum_{i = 1}^{d}z_i A_i v = 0$. On fait le produit scalaire avec $v$, 
+  \[ z\underbrace{\|v\|^2}_{> 0} + \sum_{i = 1}^{d}z_i \underbrace{\left \langle A_i v\, ,\, v \right\rangle}_{\geq 0} = 0 \]
+  Donc on ne peut pas avoir $\im z > 0$ et $\im z_i > 0$ pour tout $i$, donc $q$ ne s'annule pas dans $\HH^{d
+    + 1}$.
+\end{preuve}
+
+
+
+
+
+
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../MAeZP_cours.tex" 
+%%% End:
