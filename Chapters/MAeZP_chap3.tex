@@ -44,8 +44,175 @@ Notons $\HH = \{z \in \C \colon \im z > 0\}$ le demi-plan supérieur de $\C$.
     + 1}$.
 \end{preuve}
 
+Une \emph{\index{spécialisation de $p$}spécialisation de $p$} est un polynôme en $d$ variables obtenu en
+donnant une valeur fixe à une des variables.
+
+\emph{Attention:} si $p(z_1, z_2) = z_1(z_2-1)$, alors $p(z, 1) \equiv 0$.
+
+\begin{prop}
+  \label{prop:2}
+  Si $p(z_1, \ldots, z_d)$ est réel stable, en spécialisant $z_d$ en une valeur réelle $t$, on obtient un
+  polynôme réel stable, ou le polynôme $0$.
+\end{prop}
+
+\begin{preuve}
+  Soit $q(z_1, \ldots, z_{d-1}) := p(z_1, \ldots, z_{d-1}, t)$. Les coefficients de $q$ sont réels. On écrit
+  \[q(z_1, \ldots, z_{d-1}) = \lim_{n \to \infty} p(z_1, \ldots, z_{d-1}, t + i/n) \]
+  uniformément sur tout compact de $\C^{d-1}$. Le théorème de \textsc{Hurwitz} de l'analyse complexe
+  s'applique. En effet, $p(z_1, \ldots, z_{d-1}, t + i/n)$ est sans zéro dans $\HH^{d-1}$. Donc la limite est
+  sans zéro dans $\HH^{d-1}$ ou identiquement nul.
+\end{preuve}
 
 
+On note $\partial_i = \frac{\partial}{\partial z_i}$ la dérivée partielle par rapport à $z_i$.
+
+
+\begin{prop}
+  \label{prop:3}
+  Si $p(z_1, \ldots, z_d)$ est réel stable, alors pour tout $t \in \R$, 
+  \[ (1 + t \partial_d)p = p + t \frac{\partial p}{\partial z_d} \]
+  est réel stable.
+\end{prop}
+
+
+\begin{preuve}
+  Si $t = 0$, c'est bon. Supposons $t \neq 0$. On va procéder par l'absurde. 
+  \[ \left( (1 + t\partial_d)p \right)(z_1, \ldots, z_d) = 0 \text{ et } (z_1, \ldots, z_d) \in \HH^{d}.\]
+  Soit 
+  \[ q(z):= p(z_1, \ldots, z_{d-1}, z). \]
+  Alors $q$ n'a pas de zéro dans $\HH$ (sinon $p$ ne serait pas réel stable). En particulier, 
+  \[ q(z_d) \neq 0. \]
+  Si $n = \mathrm{deg} q$, alors 
+  \[ q(z) = \prod_{i = 1}^{n} (z-\omega_i) \tag{$\ast$}\]
+  où les $\omega_i$ sont les zéros complexes de $q$. Par ce qui précède, $\im \omega_i < 0$ pour tout
+  $i$. Alors, 
+  \[ 0 = \left((1 + t \partial_d)p\right)(z_1, \ldots, z_d) = (q + tq')(z_d) = q(z_d) \left(1 + t
+      \frac{q'(z_d)}{q(z_d)}\right) \]
+  où le terme $\frac{q'(z_d)}{q(z_d)}$ est la \index{dérivée logarithmique}dérivée logarithmique de $q$ en
+  $z_d$. Ainsi on obtient 
+  \[ 0 = 1 + t \frac{q'(z_d)}{q(z_d)}.\]
+  On prend à présent la dérivée logarithmique de $(\ast)$. Alors 
+  \[ \frac{q'(z_d)}{q(z_d)} = \sum_{i = 1}^{n} \frac{1}{z- \omega_i}. \]
+  On déduit de ceci que (en évaluant en $z_d$)
+  \[ 0 = 1 + t \sum_{i = 1}^{n} \frac{1}{z_d - \omega_i} = 1 + t \sum_{i = 1}^{n} \frac{\overline{z_d} -
+      \overline{\omega_i}}{|z_d - \omega_i|^2}. \]
+  On prend à présent les parties imaginaires: 
+  \[ 0 = t \sum_{i = 1}^{n} \frac{\im(\omega_i) - \im(z_d)}{|z_d - \omega_i|^2} \]
+  et $\im(\omega_i) < 0$ et $\im(z_d) > 0$, qui est une contradiction car $t \neq 0$ par hypothèse et la somme
+  est strictement négative (donc non nulle).
+\end{preuve}
+
+
+Pour $x = (x_1, \ldots, x_d) \in \R^d$, l'\emph{\index{orthant}orthant} $\{y \geq x\}$ est par définition 
+\[ \{y \geq d\} := \left\{ (y_1, \ldots, y_d) \in \R^d \colon y_i \geq x_i \ \forall i = 1, \ldots,
+    d\right\} \]
+(on y pensera comme le quart de plan (en deux dimensions) où les coordonnées de $y$ sont toutes plus grandes
+que celles de $x$, ou comme le huitième de plan en trois dimensions).
+
+Pour une fonction $f \colon \R^d \to \C$ de classe $\mathcal{C}^1$, on note $\Phi_f^j = \frac{\partial_j
+  f}{f}$ la \index{dérivée logarithmique}dérivée logarithmique de $f$ par rapport à la $j$-ème variable.
+
+\begin{lem}[Lemme 3.7 des notes]
+  \label{lem:4}
+  Soit $x = (x_1, \ldots, x_d) \in \R^d$, $p(z_1, \ldots, z_d)$ réel stable, sans zéro dans l'orthant
+  $\{y \geq x\}$. Supposons qu'il existe $j \in \{1, \ldots, d\}$ tel qu'il existe $\delta > 0$ (penser à
+  $\delta$ grand) avec $\Phi_p^j(x_1, \ldots, x_d) \leq 1 - \frac{1}{\delta}$. Alors $(1 - \partial_j)p$ n'a
+  pas de zéro dans l'orthant $\{y \geq x + \delta e_j\}$, et de plus, pour tout $i = 1, \ldots, d$,
+  \begin{equation}
+    \label{eq:lemme-degue}
+    \Phi_{(1-\partial_j)p}^i(x + \delta e_j)  \leq \Phi_p^i(x).
+  \end{equation}
+\end{lem}
+
+\begin{prop}
+  \label{prop:5}
+  Soit $x = (x_1, \ldots, x_d) \in \R^d$, $p(z_1, \ldots, z_d)$ un polynôme réel stable sans zéro dans
+  l'orthant $\{y \geq x\}$. S'il existe $\delta > 0$ tel que 
+  \[ \Phi_p^j (x_1, \ldots x_d) \leq 1 - \frac{1}{\delta}\ \forall j = 1, \ldots, d, \]
+  alors le polynôme 
+  \[ \prod_{i=1}^d (1 - \partial_i)p \]
+  est sans zéro dans $\{y \geq x + D\}$ où $D = (\delta, \delta, \ldots, \delta)$.
+\end{prop}
+
+\begin{preuve}
+  Pour $1 \leq k \leq d$, soit $x^{(k)} = (x_1 + \delta, x_2 + \delta, \ldots, x_k + \delta, x_{k+1}, \ldots,
+  x_d)$ et 
+  \[ q_k = \prod_{i=1}^k \left(1 - \partial_i\right)p \]
+  qui est réel stable par la Proposition \ref{prop:3}. Par récurrence à partir du Lemme \ref{lem:4}, $q_k$ n'a
+  pas de zéro dans l'orthant $\{y \geq x^{(k)}\}$ et 
+  \[ \Phi_{q_k}^j (x^{(k)}) \leq 1 - \frac{1}{\delta} \]
+  pour $j = 1, \ldots, d$. Pour $k = d$, on obtient la proposition.
+\end{preuve}
+
+
+
+\section{Polynômes caractéristiques mixtes}
+\label{sec:polyn-caract-mixtes}
+
+\paragraph{Rappel:} pour $A \in M_m(\C)$, le polynôme caractéristique est 
+\[ p_A(z) = \det(z \un_m - A). \]
+
+\begin{defi}
+  Pour $A_1, \ldots, A_d \in M_m(\C)$, le \emph{\index{polynôme caractéristique mixte}polynôme caractéristique
+    mixte} est 
+  \[ \mu[A_1, \ldots, A_d](z) = \left . \left(\prod_{j=1}^{d}(1 - \partial_j) \det\left(z \un_m + \sum_{i=1}^{d} z_i
+        A_i\right)\right) \right|_{z_1=z_2=\cdots=z_d=0}. \]
+\end{defi}
+
+\begin{rem}
+  Si $A_1, \ldots, A_d \geq 0$, par les Propositions \ref{prop:1}, \ref{prop:2} et \ref{prop:3}, $\mu[A_1,
+  \ldots, A_d]$ est réel stable.
+\end{rem}
+
+\begin{prop}
+  \label{prop:6}
+  Si $\mathrm{rang}(A_i) = 1$ pour $i = 1, \ldots, d$ avec $A = \sum_{i = 1}^{f}A_i$, alors 
+  \[ p_A(z) = \mu[A_1, \ldots, A_d](z). \]
+\end{prop}
+
+\begin{preuve}
+  La preuve se fait en deux pas.
+  \begin{enumerate}
+  \item Pour tout $B \in M_m(\C)$, le polynôme $(z_1, \ldots, z_d) \mapsto \det \left( B + \sum_{i = 1}^{d}
+      z_i A_i \right)$ est affine-multilinéaire, c'est-à-dire un exposant $\geq 2$ n'apparaît dans aucun
+    terme. Ainsi chaque terme est de la forme 
+    \[ C z_1^{\epsilon_1} z_2^{\epsilon_2} \cdots z_d^{\epsilon_d} \]
+    avec $\epsilon_i \in \{0,1\}$. Ou encore, en chaque variable, on a un polynôme de degré $\leq 1$.
+
+    Voyons-le pour $d = 1$ (puis récurrence facile). Le fait que $\mathrm{rang}(A_1) = 1$ implique que $\dim
+    \im A_1 = 1$. On prend une base de $\C^m$ dont le premier vecteur est dans $\im A_1$. Dans cette base, 
+    \[ A_1 =
+      \begin{pmatrix}
+        \ast & \ast & \cdots & \ast\\
+        0 & 0 & \cdots & 0\\
+        \vdots & \vdots & & \vdots\\
+        0 & 0 & \cdots & 0
+      \end{pmatrix}
+    \]
+    En développant $\det(B + z_1 + A_1)$ par rapport à la première ligne, on obtient un polynôme de degré
+    inférieur ou égal à 1 en $z_1$ (en effet, $B$ n'introduit que des coefficients constants dans la matrice,
+    les $z_i$ étant seulement dans la première ligne, on a la conclusion).
+
+    
+  \item Formule de Taylor à $d$ variables. Un polynôme affine-multilinéaire est égal à son développement de
+    Taylor d'ordre $(1, 1, \ldots, 1)$. On a
+    \[ \det \left( B + \sum_{i=1}^{d}t_i A_i \right) =  \left. \left(\prod_{i=1}^d \left(1 + t_i \partial_i\right) \det
+          \left( B + \sum_{i = 1}^{d} z_i A_i \right)\right) \right |_{z_1 = \cdots = z_d = 0}\]
+    pour tout $t_1, \ldots t_d \in \R$. On fait $t_1 = \cdots = t_d = -1$, $B = z \un_m$ de sorte que 
+    \[ \det \left( z \un_m - \sum_{i = 1}^{d} A_i \right) = p_A(z) = \mu[A_1, \ldots, A_d](z). \]
+  \end{enumerate}
+\end{preuve}
+
+
+\begin{ex}
+  Soit $p(z_1, z_2) = a_{00} + a_{10} z_1 + a_{01} z_2 + a_{11}z_1 z_2$. Alors 
+  \[ \left( (1 + t_1 \partial_1)p \right)(z_1,z_2) = p(z_1, z_2) + t_1(a_{10} + a_{11}z_2), \]
+  
+  \[ \left( (1 + t_2 \partial_2)(1 + t_1 \partial_1)p \right)(z_1, z_2) = p(z_1, z_2) + t_1(a_{10} +
+    a_{11}z_2) + t_2(a_{01} + a_{11}z_1) + t_2t_1a_{11}. \]
+  En posant $z_1 = z_2 = 0$, alors on obtient donc dans le développement de Taylor 
+  \[ a_{00} + a_{10} z_1 + a_{01} z_2 + a_{11}z_1 z_2. \]
+\end{ex}
 
 
 
