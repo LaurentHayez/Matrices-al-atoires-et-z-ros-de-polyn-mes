@@ -215,6 +215,182 @@ Pour une fonction $f \colon \R^d \to \C$ de classe $\mathcal{C}^1$, on note $\Ph
 \end{ex}
 
 
+\section{Preuve du théorème 2 de MSS}
+\label{sec:preuve-du-theoreme2}
+
+\begin{lem}
+  \label{lem:7}
+  Soient $A_1, \ldots, A_d$ des variables aléatoires indépendantes, à valeurs dans les matrices de rang $1$ de
+  $M_n(\C)$. Soit $A = \sum_{i = 1}^{d} A_i$. Alors 
+  \[ \E[p_A](z) = \mu[\E[A_1], \E[A_2], \ldots, E[A_d]](z). \]
+\end{lem}
+
+Le rôle de l'indépendance est que si $X, Y$ sont des variables aléatoires ordinaires, indépendantes, alors 
+\[ \E[XY] = \E[X]\E[Y], \]
+et plus généralement, si $X_1, \ldots , X_k$ sont des variables aléatoires usuelles indépendantes, alors 
+\[ \E[X_1^{\epsilon_1} X_2^{\epsilon_2} \cdots X_k^{\epsilon_k}] = \E[X_1]^{\epsilon_1} \cdots
+  \E[X_k]^{\epsilon_k}\ (\epsilon_i \in \{0,1\}). \]
+Plus généralement, si $p(z_1, \ldots , z_k)$ est un polynôme affine multilinéaire (donc tous les exposants
+sont 0 ou 1), alors 
+\[ \E[p](X_1, \ldots , X_k) = p(\E[X_1], \ldots , \E[X_k]). \]
+
+\begin{preuve}[du Lemme \ref{lem:7}]
+  Par la Proposition \ref{prop:6}, on sait que 
+  \[ p_A(z) = \mu[A_1, \ldots , A_d](z). \]
+  Ainsi $\mu[A_1, \ldots , A_d](z)$ est un polynôme affine multilinéaire en les coefficients de $A_1, \ldots ,
+  A_d$ (par la preuve de la Proposition \ref{prop:6}). Par indépendance et le raisonnement ci-dessus, 
+  \[ \E[p_A](z) = \E[\mu[A_1, \ldots , A_d](z)] = \mu[\E[A_1], \ldots \E[A_d]](z). \]
+\end{preuve}
+
+
+Si $p(z)$ est un polynôme réel stable, on note $ZM(p)$\footnote{La notation $ZM$ est pour \og zéro
+  maximal\fg{}.} le plus grand zéro réel de $p$.
+
+
+\begin{lem}
+  \label{lem:8}
+  Soient $A_1, \ldots, A_d$ des variables aléatoires indépendantes, à valeurs dans les matrices de rang $1$ de
+  $M_n(\C)$. Soit $A = \sum_{i = 1}^{d} A_i$. Supposons encore que les $A_i$ sont positives et prennent un
+  nombre fini de valeurs. Alors pour tout $j \in \{1, \ldots , d\}$, pour tout réalisation de $A_1, \ldots ,
+  A_{j-1}$ on a pour au moins une réalisation de $A_j$ 
+  \begin{align*}
+    ZM&\left( \mu\left[A_1, \ldots , A_{j-1}, A_j, \E[A_{j+1}], \ldots , \E[A_d]\right] \right) \\
+    &\leq ZM \left(
+    \mu \left[ A_1, \ldots A_{j-1}, \E[A_j],  \E[A_{j+1}], \ldots , \E[A_d]\right] \right).
+  \end{align*}
+\end{lem}
+
+\begin{preuve}
+  L'espérance $\E[A_j]$ est une moyenne pondérée des valeurs de $A_j$, donc 
+  \[ \mu\left[A_1, \ldots , A_{j-1}, \E[A_j], \E[A_{j+1}], \ldots , \E[A_d]\right] \]
+  est une moyenne pondérée des polynômes 
+  \[ \mu\left[A_1, \ldots , A_{j-1}, A_j, \E[A_{j+1}], \ldots , \E[A_d]\right], \]
+  qui sont réels stables. Par la série 5, 
+  \[ ZM \left( \mu \left[ A_1, \ldots A_{j-1}, \E[A_j],  \E[A_{j+1}], \ldots , \E[A_d]\right] \right) \]
+  est dans l'enveloppe convexe (i.e. le plus petit intervalle contenant les $ZM$ de $\mu\left[A_1, \ldots , A_{j-1},
+    A_j, \E[A_{j+1}], \ldots , \E[A_d] \right]$ prises sur les réalisations de $A_j$). Pour au moins une
+  réalisation de $A_j$, on aura
+  \begin{align*}
+    ZM&\left( \mu\left[A_1, \ldots , A_{j-1}, A_j, \E[A_{j+1}], \ldots , \E[A_d]\right] \right) \\
+    &\leq ZM \left(
+    \mu \left[ A_1, \ldots A_{j-1}, \E[A_j],  \E[A_{j+1}], \ldots , \E[A_d]\right] \right).
+  \end{align*}
+\end{preuve}
+
+
+\begin{preuve}[du Théorème 2]
+  Par le Lemme \ref{lem:7}, 
+  \[ \E[p_A] = \mu \left[ \E[A_1], \ldots , \E[A_d] \right] \] 
+  \[ \implies ZM(\E[p_A]) = ZM \left( \mu \left[ \E[A_1], \ldots , \E[A_d] \right] \right). \]
+  On utilise les $d$ inégalités du Lemme \ref{lem:8}. Pour une réalisation de $A_1$, on aura
+  \begin{align*}
+    ZM & \left(  \mu \left[ A_1, \E[A_2], \ldots , \E[A_d] \right] \right)\\
+       &\leq ZM \left( \mu \left[ \E[A_1], \ldots , \E[A_d]\right] \right).
+  \end{align*}
+  Pour au moins une réalisation de $A_1$ et $A_2$, on aura
+  \begin{align*}
+    ZM & \left(  \mu \left[ A_1, A_2, \E[A_3], \ldots , \E[A_d] \right] \right)\\
+       &\leq ZM \left( \mu \left[ A_1, \E[A_2], \ldots , \E[A_d]\right] \right).
+  \end{align*}
+  En continuant ainsi, pour au moins une réalisation de $A_1, \ldots , A_d$, on aura 
+  \begin{align*}
+  ZM \left(  \mu \left[ A_1, A_2, \ldots , A_d \right] \right) \leq ZM \left( \mu \left[ p_A\right] \right).
+  \end{align*}
+  Mais par la Proposition \ref{prop:6}, 
+  \[  ZM \left(  \mu \left[ A_1, A_2, \ldots , A_d \right] \right)  = ZM(p_A), \]
+  qui est la plus grande valeur propre de $A = \|A\|$ (car $A \geq 0$). Pour cette réalisation, 
+  \[ \|A\| \leq ZM(\E[p_A]) \]
+\end{preuve}
+
+
+\section{Preuve du Théorème 1 de MSS}
+\label{sec:preuve-du-theoreme1}
+
+\begin{prop}
+  \label{prop:9}
+  Si $A_1, \ldots , A_d \geq 0$ dans $M_n(\C)$ sont telles que 
+  \[ \sum_{i=1}^{d} A_i = \un_m \]
+  et $\mathrm{Tr}(A_i) \leq \epsilon$ pour $i = 1, \ldots , d$. Soit 
+  \[ p(z_1, \ldots , z_d) := \det \left( \sum_{i=1}^{d} z_i A_i \right). \]
+  Alors 
+  \[ \prod_{i=1}^{d} (1 - \partial_i)p \]
+  n'a pas de zéro dans l'orthant $\{y \geq E\}$ où $E=(1 + \sqrt{\epsilon})^2(1, 1, \ldots , 1)$.
+\end{prop}
+
+\begin{preuve}
+  On va utiliser la Proposition \ref{prop:5} avec $x = (\epsilon + \sqrt{\epsilon})(1, 1, \ldots , 1)$ et
+  $\delta = 1 + \sqrt{\epsilon}$. Soit $t := \epsilon + \sqrt{\epsilon}$, alors $t + \delta = (1 +
+  \sqrt{\epsilon})^2$. On doit vérifier plusieurs conditions pour utiliser la proposition:
+  \begin{enumerate}
+  \item $p$ est réel stable, sans zéro dans $\{y \geq x\}$, pour $x = t(1,1, \ldots , 1)$,
+  \item $\Phi_p^j(x) \leq 1 - \frac{1}{\delta}$.
+  \end{enumerate}
+  Vérifions ces deux conditions.
+  \begin{enumerate}
+  \item On a que 
+    \[ \det \left(z \un_m + \sum_{i = 1}^{d} z_i A_i \right) \]
+    est réel stable par la Proposition \ref{prop:1}, et $p$ est une spécialisation en $z = 0$. Ainsi $p$ est
+    réel stable par la Proposition \ref{prop:2}. Si $y \geq x$, alors 
+    \[ \sum_{i=1}^{d}y_i A_i \geq \sum_{i=1}^{d} t A_i = t \un_m\]
+    (puisque $y_i \geq t$ pour tout $i$). Ainsi 
+    \[ \sum_{i=1}^{d}y_i A_i \]
+    est inversible et 
+    \[ \det \left( \sum_{i=1}^{d} y_i A_i \right) \neq 0, \]
+    i.e. $p(y_1, \ldots , y_d) \neq 0$ (ce qui signifie que $p$ n'a pas de zéro dans l'orthant considéré).
+    
+  \item On utilise la \index{formule de \textsc{Jacobi}}formule de \textsc{Jacobi}. Si $A \colon \R \to M_m(\C)$, $t \mapsto A(t)$ est de classe
+    $C^1$, alors la dérivée logarithmique de $\det(A(t))$ est donnée par
+    \[ \frac{\det(A(t))'}{\det(A(t))} = \mathrm{Tr}(A(t)^{-1}A'(t)). \]
+    Moralement, la dérivée logarithmique du déterminant est la trace de la dérivée logarithmique.
+
+    Prenons 
+    \[ A(x_1, \ldots , x_d) := \sum_{i=1}^{d} x_i A_i. \]
+    Alors par Jacobi, on a 
+    \[ \Phi_p^j(x_1, \ldots , x_d) = \mathrm{Tr} \left( \left( \sum_{i=1}^{d}x_i A_i \right)^{-1} A_j
+      \right). \]
+    En particulier, 
+    \begin{align*}
+      \Phi_p^j(t, \ldots , t) &= \mathrm{Tr} \left( \left( t \sum_{i=1}^{d}A_i \right)^{-1} A_j \right)\\
+                              &= \mathrm{Tr}\left( (t \un_m)^{-1} A_j \right)\\
+                              &= \frac{\mathrm{Tr}(A_j)}{t}\\
+                              &\leq \frac{\epsilon}{t}.
+    \end{align*}
+    En exercice, on montre que 
+    \[ \frac{\epsilon}{t} + \frac{1}{\delta} = 1 \implies \Phi_p^j(t, \ldots ,t) \leq 1 - \frac{1}{\delta}. \]
+    La Proposition \ref{prop:9} résulte alors de la Proposition \ref{prop:5}.
+  \end{enumerate}
+\end{preuve}
+
+
+\begin{preuve}[du Théorème 1]
+  Par le Lemme \ref{lem:7}, 
+  \begin{align*}
+    \E[p_A](z)
+    &= \mu \left[ \E[A_1], \ldots , \E[A_d] \right](z)\\
+    &=\left . \left( \prod_{i=1}^{d} (1 - \partial_i)
+      \det \left( z \un_m + \sum_{i=1}^{d}z_i \E[A_i] \right) \right) \right|_{z_1= \cdots = z_d = 0} & \un_m
+                                                                                                        =
+                                                                                                        \E[A]
+                                                                                                        =
+                                                                                                        \sum_{i=1}^{d}
+    \E[A_i]\\
+    &= \left . \left( \prod_{i=1}^{d} (1 - \partial_i)
+      \det \left( \sum_{i=1}^{d}(z + z_i) \E[A_i] \right) \right) \right|_{z_1= \cdots = z_d = 0} & t_i := z +
+                                                                                                    z_i\\
+    &= \left . \left( \prod_{i=1}^{d} (1 - \partial_i)
+      \det \left( \sum_{i=1}^{d}t_i \E[A_i] \right) \right) \right|_{t_1= \cdots = t_d = z}.
+  \end{align*}
+  Puisqu'on veut utiliser la Proposition \ref{prop:9}, on doit encore vérifier la condition sur les
+  traces. Mais 
+  \[ \mathrm{Tr}(\E[A_i]) = \E[\mathrm{Tr}(A_i)] = \E[\|A_i\|] \leq \epsilon\]
+  (où la dernière égalité vient du fait $A_i \geq 0$ de rang $1$, et donc on peut trouver une base où $A_i$
+  est diagonale avec valeur propre $\lambda$ de multiplicité $1$ et des $0$ ailleurs, et l'inégalité est une
+  hypothèse). Par la Proposition \ref{prop:9}, le polynôme 
+  \[ \prod_{i=1}^{d} (1 - \partial_i) \det \left( \sum_{i=1}^{d} t_i \E[A_i] \right) \]
+  n'a pas de zéro dans l'orthant $\{y \geq E\}$ où $E = (1 + \sqrt{\epsilon})^2(1, 1, \ldots , 1)$. Donc 
+  \[ ZM(\E[p_A]) \leq (1 + \sqrt{\epsilon})^2. \]
+  
+\end{preuve}
 
 
 
