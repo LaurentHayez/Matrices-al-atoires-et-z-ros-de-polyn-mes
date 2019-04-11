@@ -1,0 +1,183 @@
+%-----------------------------------------------------------------------%
+%______//------ Matrices aléatoires et zéros de polynômes ------\\______%
+%______||------                Chapitre 4                ------||______%
+%______\\------  ------//______%
+%-----------------------------------------------------------------------%
+
+\chapter{Graphes de \textsc{Ramanujan}}
+\label{cha:graph-de-ramanujan}
+
+\section{Théorie algébrique des graphes}
+\label{sec:theor-algebr-des-graphes}
+
+Un \emph{\index{graphe}graphe} fini est une paire $X = (V,E)$ composé d'un ensemble $V$ de sommets (\og
+vertices\fg{} en anglais) et $E \subset V \times V$ d'arêtes (\og edges\fg{} en anglais). On supposera dans le
+cours qu'on a au plus une arête entre deux sommets (i.e. on n'a pas de multigraphe), qu'on n'a pas de boucle,
+et on considère que les arêtes ne sont pas orientés (i.e. si $e = (v,w) \in E$, $e' = (w,v) \in E$).
+
+On dit qu'un graphe est \emph{\index{graphe!connexe}connexe} s'il existe un chemin entre toute paire de sommet de
+$V$.
+
+On met la \index{relation d'adjacence}relation d'adjacence $x \sim y \iff \{x, y\} \in E$, et la \emph{\index{matrice
+d'adjacence}matrice d'adjacence} $A$ est indexée par les paires de sommets 
+\[ A_{xy} =
+  \begin{cases}
+    1 & \text{si } x \sim y\\
+    0 & \text{si } x \not\sim y
+  \end{cases}
+\]
+
+L'application linéaire correspondante $A \colon \C V \to \C V$ (où $\C V$ est l'ensemble des fonctions $f
+\colon V \to \C$), qui à $f \in \C V$ associe 
+\[ (A f)(x) = \sum_{y \colon y \sim x}^{}f(y). \]
+
+Puisque $A = A^\top$, on sait par l'algèbre linéaire que le spectre de $A$ $\sigma(A)$ (l'ensemble des valeurs
+propres) est réel et $A$ est diagonalisable.
+
+On dit que $X$ est \emph{\index{graphe!$d$-régulier}$d$-régulier} si tout sommet a $d$ voisins.
+
+On dit que $X$ est \emph{\index{graphe!biparti}biparti} ou \emph{\index{graphe!bicolorable}bicolorable} si et
+seulement si $V = V_1 \sqcup V_2$ tq 
+\[ x \sim y \implies
+  \begin{cases}
+    x \in V_1 \text{ et } y \in V_2\\
+    \text{ou}\\
+    x \in V_2 \text{ et } y \in V_1.
+  \end{cases}
+\]
+
+\begin{prop}
+  Soit $X$ un graphe $d$-régulier, connexe fini. Alors
+  \begin{enumerate}
+  \item si $\lambda$ est une valeur propre de $A$, alors $|\lambda| \leq d$~;
+  \item $d$ est valeur propre de multiplicité $1$~;
+  \item $-d$ est valeur propre de $A$ ssi $X$ est biparti (ou bicolorable), et dans ce cas $\sigma(A)$ est
+    symétrique par rapport à $0$ ($\lambda \in \sigma(A) \implies -\lambda \in \sigma(A)$).
+  \end{enumerate}
+
+\end{prop}
+
+
+\begin{preuve}
+  \begin{enumerate}
+  \item Soit $\lambda \in \sigma(A)$ et soit $f$ la fonction propre associée à $\lambda$. Soit $x_0 \in V$ tel
+    que $|f(x_0)| \geq |f(x)|$ pour tout $x \in V$. On a 
+    \[ |\lambda||f(x_0)| = |\lambda f(x_0)| = |Af(x_0)| = \left| \sum_{y \sim x_0}^{}f(y) \right| \leq
+      \underbrace{\sum_{y\sim x_0}^{}|f(y)|}_{d \text{ termes}} \leq d|f(x_0)|,\]
+    et donc (puisque $f$ est une fonction propre non nulle)
+    \[ |\lambda| \leq d. \]
+
+    
+  \item Soit $f \equiv 1$ sur $V$, alors $Af = df$ et 
+    \[ Af(x) = \sum_{y \sim x}^{} f(y) = d. \]
+    Soit à présent $f$ la fonction propre associée à $d$. On veut montrer qu'alors $f$ est constante. On peut
+    supposer $f$ à valeurs réelles (car on peut séparer parties réelles et imaginaires). Soit $x_0 \in V$ un sommet qui réalise 
+    \[ |f(x_0)| \geq |f(x)|\ \forall x \in V. \]
+    Quitte à remplacer $f$ par $-f$, on peut supposer que $f(x_0) > 0$. On a 
+    \[ df(x_0) = Af(x_0) = \sum_{y \sim x_0}^{} f(y).  \]
+    Ainsi 
+    \[ f(x_0) = \frac{1}{d} \sum_{y \sim x_0}^{}f(y), \]
+    i.e. on peut voir $f(x_0)$ comme la moyenne de $f$ sur les $d$ voisins. Mais puisque $f(x_0)$ est un
+    maximum, on a que $f(y) = f(x_0)$ pour tout $y \sim x_0$. En continuant ainsi, par connexité, $f$ est
+    constante. On voit encore que $d$ est de multiplicité $1$ car l'espace propre associé est de dimension $1$.
+
+  \item Soit $X$ biparti. Alors on prend 
+    \[ f(x) =
+      \begin{cases}
+        1 & \text{si } x \in V_1,\\
+        -1 & \text{si } x \in V_2.
+      \end{cases}
+    \]
+    Soit $x \in V_1$ pour le moment, alors
+    \[ (Af)(x) \sum_{y \sim x}^{} f(y) = -d = -df(x).\]
+    Symétriquement, on a la même chose si $x \in V_2$. Ainsi on conclut que 
+    \[ Af = -df. \]
+
+    La réciproque ($-d$ valeur propre implique $X$ est biparti) est un exercice.
+
+    Soit encore $X$ biparti et soit $\lambda \in \sigma(\lambda)$, soit $g$ une \index{fonction propre }fonction propre associée à
+    $\lambda$ ($Ag = \lambda g$) et considérons 
+    \[ f(x) = \begin{cases}
+        g(x) & \text{si } x \in V_1,\\
+        -g(x)& \text{si } x \in V_2.
+      \end{cases} \]
+    Vérifions que $Af = -\lambda f$. Soit $x \in V_1$. Alors 
+    \[ (Af)(x) = \sum_{y \sim x}^{} f(\underbrace{y}_{\in V_2}) = -\sum_{y \sim x}^{} g(y) = -(Ag)(x) =
+      -\lambda g(x) = -\lambda f(x).\]
+    Si $x \in V_2$, on a la même conclusion. Ainsi on a bien 
+    \[ Af = -\lambda f. \]
+  \end{enumerate}
+\end{preuve}
+
+
+Soit $X$ un graphe fini connexe $d$-régulier à $n$ sommets. On range les valeurs propres de $A$ par ordre
+décroissant, en tenant compte des multiplicités. On note la plus grande valeur propre $\mu_0 = d$ et on a
+(puisque $d$ est de multiplicité $1$) 
+\[ \mu_0 = d > \mu_1 \geq \mu_2 \geq \cdots \geq \mu_{n-1} (\geq -d). \]
+Le \emph{\index{trou spectral}trou spectral} du graphe est 
+\[ d - \mu_1. \]
+
+\begin{defi}
+  Un graphe $d$-régulier connexe fini est \emph{\index{graphe!de \textsc{Ramanujan}}de \textsc{Ramanujan}} si 
+  \[ \mu_1 \leq 2 \sqrt{d - 1}. \]
+\end{defi}
+
+
+\begin{exs}
+  \begin{enumerate}
+  \item Pour $d = 2$~: les graphes $2$-réguliers connexes finis sont les cycles. L'inégalité $\mu_1 \leq 2$
+    est triviale.
+  \item Le \index{graphe!complet}graphe complet $K_n$ sur $n$ sommets (i.e. tout sommet est relié avec tout
+    autre) est $(n-1)$-régulier. Soit $J_n$ la matrice $n \times n$ remplie de $1$. Ainsi 
+    \[ A = J_n - \un_n, \]
+    on a de plus 
+    \[ J_n = n J_n \implies \left(\frac{J_n}{n}\right)^2 = \frac{J_n}{n}. \]
+    Ainsi la matrice $\frac{J_n}{n}$ est une matrice de projection, donc $\sigma\left( \frac{J_n}{n} \right) =
+    \{0,1\}$. Ainsi $\sigma(J_n) = \{0,n\}$. Ainsi on en déduit que 
+    \[ \sigma(A) = \left\{-1, n-1\right\} \]
+    et $-1 = \mu_1$.
+  \end{enumerate}
+\end{exs}
+
+\paragraph{D'où sort $2\sqrt{d-1}$?}
+
+\begin{itemize}
+\item Un graphe connexe $X$ sans cycle est un \emph{\index{arbre}arbre}. Soit $T_d$ l'arbre $d$-régulier (donc
+  $T_d$ est infini). Par exemple, $T_{2d}$ est le graphe de Cayley de $\mathbb{F}_d$. De plus, $T_d$ est le
+  revêtement universel de tout graphe $d$-régulier connexe.
+
+  Si $A$ est la matrice d'adjacence de $T_d$, on peut voir $A$ comme un opérateur borné sur $\ell^2(T_d)$ et
+  $A = A^\ast$, et
+  \[ \sigma(A) = \left[ -2 \sqrt{d-1}, 2 \sqrt{d-1} \right]. \] Ce résultat est dû à Harry \textsc{Kesten},
+  1959 (une partie de sa thèse).
+
+  
+\item Soit $(X_n)_{n > 0}$ une suite de graphes $d$-réguliers, connexes, finis, $|V_n| \xrightarrow{n \to
+    \infty} \infty$. L'\index{inégalité d'\textsc{Alon-Boppana}}inégalité d'\textsc{Alon-Boppana} ($\sim$ 1984) dit 
+  \[ \liminf_{n \to \infty} \mu_1(X_n) \geq 2 \sqrt{d-1}. \]
+\end{itemize}
+
+On peut interpréter ceci en disant que les graphes de Ramanujan sont les graphes \og qui ont le plus grand
+trou spectral possible\fg{} asymptotiquement.
+
+Cela pose le problème de l'existence de familles infinies de graphes de Ramanujan $d$-réguliers pour $d >
+2$. En 1986, A. \textsc{Lubotzky}, R. \textsc{Phillips} et P. \textsc{Sarnak} (équipe américaine) (indépendamment
+G. \textsc{Margulis} pour l'équipe de Russie) ont construit des familles infinies de graphes de Ramanujan
+$d$-réguliers, pour $d$ de la forme $p^{k}+1$, $p$ premier et $k \geq 1$. Pour ce faire, ils ont utilisé la
+conjecture de Ramanujan (1916) en théorie des nombres qui avait été démontrée en 1974 par Pierre \textsc{Deligne}
+(médaille Fields en 1978, comme \textsc{Margulis}).
+
+\paragraph{Question:}
+
+Pour quelles valeurs de $d$ existe-t-il des familles infinies de graphes de Ramanujan $d$-réguliers?
+
+
+
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../MAeZP_cours.tex" 
+%%% End:
