@@ -122,6 +122,8 @@ Le \emph{\index{trou spectral}trou spectral} du graphe est
   \[ \mu_1 \leq 2 \sqrt{d - 1}. \]
 \end{defi}
 
+MAUVAISE DÉFINITION~! LA BONNE DÉFINITION EST LA DÉFINITION \ref{defi:graphe-de-ramanujan}.
+
 
 \begin{exs}
   \begin{enumerate}
@@ -170,6 +172,241 @@ conjecture de Ramanujan (1916) en théorie des nombres qui avait été démontr�
 \paragraph{Question:}
 
 Pour quelles valeurs de $d$ existe-t-il des familles infinies de graphes de Ramanujan $d$-réguliers?
+
+
+Bonne définition d'un graphe de Ramanujan: 
+\begin{defi}
+  \label{defi:graphe-de-ramanujan}
+  Un graphe fini, connexe et $d$-régulier est \emph{\index{de \textsc{Ramanujan}}de \textsc{Ramanujan}} si
+  pour toute valeur propre $\mu$ de $A$ , on a $|\mu| = d$ ou 
+  \[ |\mu| \leq 2 \sqrt{d - 1}. \]
+\end{defi}
+
+Interprétation: on a toujours la valeur propre $\mu = d$, $\mu = -d$ est là ssi $X$ est bicolorable et les autres
+valeurs propre dans le cas Ramanujan sont dans l'intervalle $\left[-2\sqrt{d-1}, 2\sqrt{d-1}\right]$.
+
+Pour revenir à la question posée précédemment, LPS ont montré que pour $d = 1 + p^k$ ($p$ premier), il y a des
+constructions \textit{explicites} de familles infinies de graphes de Ramanujan $d$-réguliers, à la fois
+bicolorables et non bicolorables.
+
+\begin{theo}[MSS, 2013]
+  Pour tout $d \geq 3$, il existe des familles infinies, non explicites, de graphes de Ramanujan $d$-réguliers bicolorables.
+\end{theo}
+
+\paragraph{Problème ouvert:}
+
+Même chose en remplaçant bicolorable par non bicolorable.
+
+Les technique de MSS leur permettent de contrôler \og le haut du spectre\fg{} de $A$. L'hypothèse que $X$ est
+biparti leur permet de contrôler également le \og bas du spectre\fg{}, puisque dans ce cas, le spectre est
+symétrique.
+
+
+\section{$2$-relèvements (\og $2$-lifts\fg{})}
+\label{sec:2-relevements}
+
+
+\begin{defi}
+  Soit $X=(V,E)$ un graphe fini. Un \emph{\index{signage}signage} de $X$ est une fonction 
+  \[ s \colon V \times V \to \{-1, 0, 1\} \]
+  qui est symétrique (i.e. $s(x,y) = s(y,x)$) et telle que 
+  \[ s(x,y) \neq 0 \iff x \sim y. \]
+\end{defi}
+
+\begin{rem}
+  On peut aussi y penser comme une fonction $E \to \{\pm 1\}$.
+\end{rem}
+
+Si $s$ est un signage de $X$, la \emph{\index{matrice d'adjacence signée}matrice d'adjacence signée} 
+\[ (A^{(s)})_{xy} = s(x,y) \quad (x,y \in V). \]
+Ainsi en mettant le signage constante ($s(x,y) = 1$ si $x \sim y$), c'est la matrice d'adjacence usuelle.
+
+Si $|V| = n$ et $s$ est un signage de $X$, le \emph{\index{$2$-relèvement}$2$-relèvement} de $X$ associé à $s$
+est un graphe $\tilde{X}^{(s)}$ à $2n$ sommets, avec $\tilde{V} = V_1 \sqcup V_2$, où $V_1$ et $V_2$ sont des
+copies de $V$.
+\begin{itemize}
+\item Si $xy \in E$ et $s(x,y) = 1$, soient $x_1 \in V_1$, $x_2, \in V_2$ les sommets correspondants à $x \in
+  V$, et $y_1 \in V_1$, $y_2 \in V_2$ les sommets correspondants à $y \in V$. Alors on relie $x_1$ à $y_1$
+  dans $V_1$ et
+  $x_2$ à $y_2$ dans $V_2$.
+\item Si $xy \in E$ et $s(x,y) = -1$, soient $x_1 \in V_1$, $x_2, \in V_2$ les sommets correspondants à $x \in
+  V$, et $y_1 \in V_1$, $y_2 \in V_2$ les sommets correspondants à $y \in V$. Alors on relie $x_1$ à $y_2$
+  dans $V_1 \times V_2$ et
+  $x_2$ à $y_1$ dans $V_2 \times V_1$.
+\end{itemize}
+
+\begin{exs}
+  \begin{enumerate}
+  \item Si $s(x,y) = 1$ si $x \sim y$, alors $\tilde{X}^{(s)}$ est formé de deux copies de $X$ (non connexe).
+  \item Si $X = C_n$, $s(x,y) = 1$ pour chaque arête sauf $1$, le graphe est connexe~: $\tilde{X}^{(s)} \simeq
+    C_{2n}$ (faire le dessin pour se convaincre).
+  \end{enumerate}
+\end{exs}
+
+\begin{exercice}
+  \begin{enumerate}
+  \item Si $X$ est $d$-régulier, alors $\tilde{X}^{(s)}$ aussi.
+  \item Si $X$ est biparti, alors $\tilde{X}^{(s)}$ aussi.
+  \end{enumerate}
+\end{exercice}
+
+
+\begin{lem}[Y. \textsc{Bilu}, N. \textsc{Linial}, 2006]
+  Soit $\tilde{A}^{(s)}$ la matrice d'adjacence de $\tilde{X}^{(s)}$ (de taille $2n \times 2n$). Alors 
+  \[ \sigma(\tilde{A}^{s}) = \sigma(A) \cup \sigma(A^{(s)}). \]
+\end{lem}
+
+\begin{preuve}
+  Décomposons $\tilde{A}^{(s)}$ selon la $1$ère et la $2$ème copie de $V$
+  \[ 
+    \tilde{A}^{(s)} =
+    \begin{pmatrix}
+      A_1 & A_2 \\ A_2 & A_1
+    \end{pmatrix}
+  \]
+  où $(A_1)_{xy} = 1$ ssi $x \sim y$ et $s(x,y) = 1$ et $(A_2)_{xy} = 1$ ssi $x \sim y$ et $s(x,y) = -1$.
+
+  Alors $A = A_1 + A_2$, et $A^{(s)} = A_1 - A_2$. Si $v$ est un vecteur propre de $A$, de valeur propre
+  $\mu$, $Av = \mu v$, alors 
+  \[ \tilde{A}^{(s)}
+    \begin{pmatrix}
+      v \\ v
+    \end{pmatrix} =
+    \begin{pmatrix}
+      A_1v + A_2 v\\ A_2v + A_1v
+    \end{pmatrix} =
+    \begin{pmatrix}
+      Av \\ Av
+    \end{pmatrix} = \mu
+    \begin{pmatrix}
+      v \\ v
+    \end{pmatrix}
+  \]
+  et donc $\sigma(A) \subset \sigma(\tilde{A}^{(s)})$.
+
+  Si $u$ est un vecteur propre de $A^{(s)}$, de valeur propre $\lambda$, $A^{(s)} \lambda = u\lambda$. Alors 
+  \[ \tilde{A}^{(s)}
+    \begin{pmatrix}
+      u\\ - u
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      A_1 u - A_2 u\\ A_2u - A_1 u
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      A^{(s)} u\\ - A^{(s)}u
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+      \lambda u\\ - \lambda u
+    \end{pmatrix}
+    = \lambda
+    \begin{pmatrix}
+      u \\ -u
+    \end{pmatrix}.
+  \]
+  et donc $\sigma(A^{(s)}) \subset \sigma(\tilde{A}^{(s)})$. Mais puisque $
+  \begin{pmatrix}
+    v\\v
+  \end{pmatrix} \perp
+  \begin{pmatrix}
+    u\\ -u
+  \end{pmatrix}$. Mais en comptant les multiplicités, les $\binom{v}{v}$ engendrent un sous-espace de
+  dimension $n$, les $\binom{u}{-u}$ aussi (qui est orthogonal au précédent), donc on a trouvé une base de
+  vecteurs propres de $\tilde{A}^{(s)}$, et il n'y a pas d'autre valeur propre.
+\end{preuve}
+
+\paragraph{Conséquence:} Si $X$ est $d$-régulier, alors $\sigma(A^{(s)}) \subset [-d, d]$.
+
+\paragraph{Observation:} Si $X$ est $d$-régulier Ramanujan, et $s$ est un signage tel que $\sigma(A^{(s)})
+\subset \left[-2\sqrt{d-1}, 2\sqrt{d-1}\right]$, alors $\tilde{X}^{(s)}$ est Ramanujan. En effet,
+$\tilde{X}^{(s)}$ est connexe car la multiplicité de la valeur propre $d$ vaut $1$ et les valeurs propres
+venant de $A^{(s)}$ sont toutes dans $\left[ -2 \sqrt{d-1}, 2 \sqrt{d-1}\right]$, donc (par le Lemme),
+$\tilde{X}^{(s)}$ est Ramanujan.
+
+
+\begin{conj}[de \textsc{Bilu-Linial}, 2006]
+  Si $X$ est $d$-régulier, alors il existe un signage $s$ de $X$ avec 
+  \[ \sigma(A^{(s)}) \subset \left[-2 \sqrt{d-1}, 2\sqrt{d-1}\right]. \]
+\end{conj}
+
+\begin{theo}[MSS]
+  \label{theo:3}
+  La conjecture de Bilu-Linial est vraie pour un graphe $d$-régulier biparti.
+\end{theo}
+
+\begin{rem}
+  La conjecture est toujours ouverte pour le cas non biparti.
+\end{rem}
+
+\begin{conseq}
+  Il existe des familles infinies de graphes de Ramanujan $d$-réguliers bipartis.
+\end{conseq}
+
+
+L'observation et le Théorème \ref{theo:3} montrent que, si $X$ est $d$-régulier, bicolorable et Ramanujan,
+alors $X$ possède un signage $s$ tel que $\tilde{X}^{(s)}$ est $d$-régulier, biparti et Ramanujan. On peut
+itérer. On démarre avec le graphe biparti complet $K_{d,d}$.
+
+\section{Preuve du Théorème \ref{theo:3}}.
+
+
+Soit $X$ $d$-régulier, biparti, à $n$ sommets et $m$ arêtes. Soit $s$ un signage de $X$, et $e = \{u, v\} \in
+E$, on définit une matrice positive de rang $1$: $A_e^{(s)}\geq 0$. Si $s(u,v) = 1$, 
+\[ (A_e^{(s)})_{xy} =
+  \begin{cases}
+    1 & \text{si } x, y \in \{u,v\},\\
+    0 & \text{si } x \text{ ou } y \notin \{u,v\}.
+  \end{cases}
+\]
+Si $f \colon V \to \C$, 
+\[ A_e^{(s)}(f) = \left \langle f\, ,\, \delta_u + \delta_v \right \rangle(\delta_u + \delta_v).  \]
+Si $s(u,v) = -1$, alors
+\[ (A_e^{(s)})_{xy} =
+  \begin{cases}
+    1 & \text{si } x = y = u \text{ ou } x = y = v,\\
+    -1 & \text{si } (x=u \text{ et } y = v) \text{ ou } (x=v \text{ et } y = u),\\
+    0 & \text{si } x \notin \{u,v\} \text{ ou } y \notin \{u,v\}.
+  \end{cases}
+\]
+On a
+\[ A_e^{(s)}(f) = \left \langle f\, ,\, \delta_u - \delta_v \right \rangle(\delta_u - \delta_v).  \]
+Alors 
+\[ \sum_{e \in E}^{}A_e^{(s)} = A^{(s)} + d \un_n. \]
+
+\begin{preuve}[du Théorème \ref{theo:3}]
+
+\end{preuve}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
