@@ -375,8 +375,145 @@ On a
 Alors 
 \[ \sum_{e \in E}^{}A_e^{(s)} = A^{(s)} + d \un_n. \]
 
-\begin{preuve}[du Théorème \ref{theo:3}]
+Il y a $2^m$ signages. On munit l'ensemble des $2^m$ signages de la proba uniforme (chacun de proba
+$\frac{1}{2^m}$). Pour $e \in E$ fixé, on voit $s \mapsto A_e^{(s)}$ comme une variable aléatoire à valeurs
+dans les matrices $\geq 0$ de rang $1$. Les variables $(A_e^{(s)})_{e \in E}$ sont indépendantes.
 
+Le théorème 2 de MSS s'applique et dit: pour au moins une réalisation des $A_e^{(s)}$, c'àd pour au moins un
+signage $s$ 
+\[ \|d \un_n + A^{(s)}\| = ZM(p_{(d\un_n + A^{(s)})}) = ZM(\E p_{(d \un_n + A^{(s)})}). \]
+Notons $\mu_{max}^{(s)}$ la plus grande valeur propre de $A^{(s)}$, donc $\|d \un_n + A^{(s)}\| = d +
+\mu_{max}^{(s)}$. D'autre part 
+\[ \left(\E[p(d \un_n + A^{(s)})]\right)(z) = \frac{1}{2^m} \sum_{s}^{} p(d \un_n + A^{(s)})(z) =
+  \frac{1}{2^m} \sum_{s}^{}p_{A^{(s)}}(z-d) = \left( \E[p_{A^{(s)}}]\right)(z-d) \]
+
+\begin{defi}
+  Un \emph{\index{mariage}mariage} \og matching\fg{} dans un graphe fini est une collection d'arêtes disjointes
+  telle que chaque sommet est relié à un unique autre sommet. (Note: en cours, la définition était un dessin,
+  mais c'est l'idée. Apparemment, selon la suite, on n'a pas besoin de \og marier\fg{} tous les sommets)
+\end{defi}
+
+On note $p_r$ le nombre de mariages à $r$ sommets (convention, $p_0 = 1$). Le \emph{\index{polynôme de
+    mariage}polynôme de mariage} de $X$ est 
+\[ \mu_X(z) := \sum_{r \geq 0}^{} (-1)^r p_r z^{n - 2r} \]
+où $n$ est le nombre de sommets. Noter que $r \leq \frac{n}{2}$.
+
+\begin{prop}
+  \begin{enumerate}
+  \item (MSS) $\E[p_{A^{(s)}}] = \mu_X$
+  \item (\textsc{Heilmann-Lieb}, 1972) Si $|X| \geq 3$, si le degré maximal de $X$ est $d$, alors le zéro
+    maximal de $\mu_X$ est inférieur ou égal à $2 \sqrt{d-1}$.
+  \end{enumerate}
+\end{prop}
+
+On peut à présent terminer la preuve du Théorème \ref{theo:3}: pour un certain signage, 
+\begin{align*}
+  d + \mu_{max}^{(s)} = ZM(p_{(d \un_n + A^{(s)})})
+  &\leq ZM(\E[p_{(d\un_n + A^{(s)})}])\\
+  &= d + ZM(\E[p_{A^{(s)}}]) \\
+  &= d + ZM(\mu_X) & \text{par la Prop.}\\
+  &\leq d + 2\sqrt{d-1} & \text{par la Prop.}
+\end{align*}
+Ainsi, $\mu_{max}^{(s)} \leq 2 \sqrt{d-1}$ ce qui est la conjecture de Bilu-Linial (pour $X$ biparti).
+
+La proposition redémontre un résultat de \textsc{Godsil-Gutman} de 1980: $\mu_X$ a toutes ses racines
+réelles. La raison est que, par le Lemme \ref{lem:7} 
+\[ \E[p_{A^{(s)}}] = \mu[\E[A_{e_1}^{(s)}], \ldots , \E[A_{e_m}^{(s)}]] \]
+est un polynôme caractéristique mixte (on a numéroté les arêtes de $1$ à $m$). Ce dernier est réel stable,
+donc toutes ses racines sont réelles.
+
+\begin{preuve}[de la Proposition]
+  \begin{enumerate}
+  \item On a vu que 
+    \[ \det(B) := \sum_{\sigma \in Sym(n)}^{} \epsilon(\sigma) \prod_{i=1}^n B_{i \sigma(i)}.  \]
+    Ainsi, 
+    \[ p_{A^{(s)}} = \det(z \un_n - A^{(s)}) = \sum_{\sigma \in Sym(n)}^{} \epsilon(\sigma) \prod_{i=1}^n (z
+      \un_n - A^{(s)})_{i \sigma(i)}. \]
+    Pour $\sigma \in Sym(n)$ fixé, 
+    \[ (z \un_n - A^{(s)})_{i \sigma(i)} =
+      \begin{cases}
+        z & \text{si } i = \sigma(i)\\
+        -s(i, \sigma(i)) & \text{si } i \neq \sigma(i).
+      \end{cases}
+    \]
+    Si $S$ est l'ensemble des points non fixes de $\sigma$, et $|S| = k$, alors 
+    \[ \prod_{i =^1}^{n}(z \un_n - A^{(s)})_{i \sigma(i)} = z^{n-k} (-1)^k \prod_{i \in S} s(i, \sigma(i)).\]
+    Notons $\pi := \sigma|_S$. On range les $\sigma$ par $k$ croissants où $k$ est le nombre de points non
+    fixes. Alors 
+    \[ p_{A^{(s)}}(z) = \sum_{k = 0}^{n} (-1)^k z^{n-k} \sum_{\substack{S \subset \{1, 2, \ldots , n\}\\
+          |S|=k}}^{} \sum_{\substack{\pi \in Sym(S)\\\text{sans point fixe}}}^{} \epsilon(\pi) \prod_{i \in
+        S} s(i, \pi(i)). \]
+    Puisque cette expression est si belle, prenons l'espérance!
+    
+    \[ \E[p_{A^{(s)}}](z) = \sum_{k=0}^{n} (-1)^k z^{n-k} \sum_{\substack{S \subset \{1, 2, \ldots , n\}\\
+          |S|=k}}^{} \sum_{\substack{\pi \in Sym(S)\\\text{sans point fixe}}}^{} \epsilon(\pi)
+      \E\left(\prod_{i \in S} s(i, \pi(i))\right). \]
+    Pour $i,j$ fixés, la variable aléatoire $s \mapsto s(i,j)$ est d'espérance nulle, i.e. $\E[s(i,j)] =
+    0$. On a deux cas possible
+    \begin{itemize}
+    \item si $i \not \sim j$, $s(i,j) = 0$,
+    \item si $i \sim j$, on a une chance sur deux d'avoir $s(i,j) = 1$ et $s(i,j) = -1$.
+    \end{itemize}
+
+    Les variables aléatoires $(s(i,j))_{i,j \in V}$ sont indépendantes (la valeur sur une arête n'influe pas
+    sur la valeur sur une autre arête). À ce moment là, on a très envie d'utiliser l'indépendance pour
+    permuter l'espérance et le produit. Mais on ne peut pas, sinon on aurait que $p_{A^{(s)}} \equiv 0$... Il
+    faut donc remarquer pourquoi ce n'est pas le cas! Si $\pi$ a un cycle de longueur au moins 3, alors 
+    \[ \E\left[\prod_{i \in S} s(i, \pi(i))\right] = \underbrace{\E[s(i_1, i_2)]}_{=0} \prod \ldots  \]
+    (où le deuxième produit n'est pas spécifié). Ainsi, si on a un cycle de longueur au moins $3$, l'espérance
+    est nulle. Il reste donc les produits de transpositions disjointes. Soit $\pi$ un tel produit. Alors 
+    \[ s(i, \pi(i))s(\pi(i), i) =
+      \begin{cases}
+        (\pm 1)^2 = 1 & \text{si } i \sim \pi(i)\\
+        0 & \text{si } i \not \sim \pi(i).
+      \end{cases}
+    \]
+    Dans ce cas là, $\pi$ réalise un mariage parfait sur les sommets de $S$! La seule façon d'avoir 
+    \[ \E\left[\prod_{i \in S} s(i, \pi(i))\right] \neq 0 \]
+    (même égal à 1 dans ce cas) est que $\pi$ réalise un \emph{\index{mariage parfait}mariage parfait} de $S$
+    (c'àd un mariage impliquant tous les sommets de $S$). Ceci ne peut arriver que si $|S| = k \equiv 0 \pmod
+    2$.
+
+    Enfin, si $\pi$ est un produit de transpositions disjointes de $S$, $\epsilon(\pi) = (-1)^{\frac{k}{2}}$
+    (car la signature vaut $-1$ à la puissance le nombre de transpositions). Ainsi 
+    \begin{align*}
+      \E[p_{A^{(s)}}] &= \sum_{\substack{k = 0\\k \text{ pair}}}^{n} z^{n-k}(-1)^{k/2} p_{k/2} & \frac{k}{2} = r\\
+                      &= \sum_{r = 0}^{n/2}z^{n-2r}(-1)^r p_r\\
+      &= \mu_X(z),
+    \end{align*}
+    et on retombe sur le beau polynôme de mariage!
+    \begin{exercice}
+      Les zéros de $\mu_X$ sont symétriques par rapport à $0$.
+    \end{exercice}
+
+    
+  \item La preuve se fait en deux pas.
+    \begin{enumerate}
+    \item Pour tout $u \in V$, on a 
+      \begin{equation}
+        \label{eq:1}
+        \mu_X(z) = z\mu_{X \setminus \{u\}}(z) - \sum_{v \sim u}^{}\mu_{X \setminus \{u, v\}}(z)
+      \end{equation}
+      (c'est une formule de récurrence, en partant de $\mu_\emptyset = 1$). Dans $X$, on a deux types de
+      mariages (ceux qui contiennent $u$, et ceux qui ne contiennent pas $u$).
+      \begin{itemize}
+      \item Ceux qui ne comprennent pas $u$: ils donnent un mariage (avec le même nombre d'arêtes) de $X
+        \setminus \{u\}$. Cela nous donne le terme $z \mu_{X \setminus \{u\}}(z)$.
+      \item Ceux qui passent par $u$ et par un unique voisin $v$ de $u$. Disons que ce mariage a $r$ arêtes,
+        alors en enlevant $uv$, il reste un mariage à $r-1$ arêtes de $X \setminus \{u, v\}$.
+      \end{itemize}
+      Alors 
+      \begin{align*}
+        \sum_{r}^{}(-1)^r p_r z^{n - 2r}
+        &= \sum_{r}^{} (-1)^r p_{r, X \setminus \{u\}} z^{n - 2r} + \sum_{v
+          \sim u}^{} \sum_{r \geq 0}^{} (-1)^r p_{r-1, X \setminus \{u,v\}} z^{n-2r}\\
+        &= z \mu_{X \setminus \{u\}}(z) - \sum_{v \sim u}^{} \sum_{r \geq 0}^{} p_{r-2, X \setminus \{u,
+          v\}}z^{(n-2)-2(r-1)}\\
+        &= z \mu_{X \setminus \{u\}}(z) - \sum_{v \sim u}^{} \mu_{X \setminus \{u, v\}}(z).
+        \end{align*}
+    \end{enumerate}
+
+  \end{enumerate}
 \end{preuve}
 
 
