@@ -510,24 +510,183 @@ donc toutes ses racines sont réelles.
         &= z \mu_{X \setminus \{u\}}(z) - \sum_{v \sim u}^{} \sum_{r \geq 0}^{} p_{r-2, X \setminus \{u,
           v\}}z^{(n-2)-2(r-1)}\\
         &= z \mu_{X \setminus \{u\}}(z) - \sum_{v \sim u}^{} \mu_{X \setminus \{u, v\}}(z).
-        \end{align*}
+      \end{align*}
+
+    \item (La dernière fois, on a utilisé la variable $z$, cette fois, la variable $x$ juste pour perturber un
+      peu :-)) On a 
+      \[ \mu_X(x) = x \mu_{X \setminus \{u\}}(x) - \sum_{v \sim u}^{} \mu_{X \setminus \{u, v\}}(x). \]
+      On veut montrer que si $X$ est de degré maximum $d$, alors $ZM(\mu_X) \leq 2 \sqrt{d-1}$. On montre par
+      récurrence sur $|Y|$, que, si $Y$ est un sous-graphe induit de $X$, si $u \in Y$ a un voisin dans $X
+      \setminus Y$, alors pour tout $x > 2\sqrt{d-1}$; on a $\mu_Y(x) > 0$ et 
+      \[ \frac{\mu_Y(x)}{\mu_{Y \setminus \{u\}}(x)} \geq \sqrt{d-1} \]
+      (le facteur $2$ manquant n'est pas un oubli). Un \emph{\index{sous-graphe induit}sous-graphe induit}
+      veut dire que si $u, v \in V(Y)$, alors $v \sim_Y u \iff u \sim_X v$, où la notation $\sim_Z$ veut dire
+      \og est adjacent à dans le graphe $Z$\fg{}.
+
+      Le pas initial se fait pour $Y = \{u\}$, alors $\mu_Y(x) = x$ et $\mu_\emptyset(x) = 1$ (par
+      convention). On vérifie que pour $x > 2\sqrt{d-1}$, on a bien $\mu_Y(x) > 0$, et 
+      \[ \frac{\mu_Y(x)}{\mu_{Y \setminus \{u\}}(x)}\geq \sqrt{d-1}. \]
+
+      On passe à présent à l'étape d'induction. Soit $u \in Y$ avec un voisin dans $X \setminus \{u\}$. On
+      utilisera $\deg_Y(u) \leq d-1$ (car on sait qu'il y a une arête qui n'est pas $Y$ par hypothèse). Alors 
+      \[ \mu_Y(x) = x\mu_{Y \setminus \{u\}}(x) - \sum_{v \sim_Y u}^{} \mu_{Y \setminus \{u,v\}}(x), \]
+      et en divisant on obtient 
+      \[ \frac{\mu_Y(x)}{\mu_{Y \setminus \{u\}}(x)} = x - \sum_{v \sim_Y u}^{} \frac{\mu_{Y \setminus \{u,
+            v\}}(x)}{\mu_{Y \setminus \{u\}}(x)}.  \]
+      On applique l'hypothèse de récurrence à $Y \setminus \{u\}$ pour chaque $v$ avec $v \sim_Y u$, et on a
+      alors 
+      \[ \frac{\mu_{Y \setminus \{u\}}(x)}{\mu_{Y \setminus \{u,v\}}(x)} \geq \sqrt{d-1} \text{ si } x > 2
+        \sqrt{d -1}. \]
+      Donc 
+      \begin{align*}
+        \frac{\mu_Y(x)}{\mu_{Y \setminus \{u\}}(x)}
+        &\geq x - \sum_{v \sim_Y u}^{} \frac{1}{\sqrt{d-1}} &\text{
+                                                              si } x > 2 \sqrt{d-1}.\\
+        &> 2\sqrt{d-1} - \sum_{v \sim_Y u}^{} \frac{1}{\sqrt{d-1}}\\
+        &\geq 2 \sqrt{d-1} - \frac{d-1}{\sqrt{d-1}}\\
+        &= \sqrt{d-1}.
+      \end{align*}
+      Comme $\mu_{Y \setminus \{u\}}(x) > 0$ par hypothèse de récurrence, on a aussi $\mu_Y(x) > 0$.
     \end{enumerate}
 
+  \item On doit encore montrer que $\mu_X(x) > 0$ pour $x > 2 \sqrt{d-1}$ (si c'est positif à droite de cette
+    valeur, tous les zéros sont à gauche). Soit $u \in X$, alors 
+    \[ \mu_X(x) = \mu_{X \setminus \{u\}}(x)\left( x - \sum_{v \sim u}^{} \frac{\mu_{X \setminus
+            \{u,v\}}(x)}{\mu_{X \setminus \{u\}}(x)} \right). \]
+    On applique le point précédent à $Y = X \setminus \{u\}$. Alors 
+    \[ \mu_{X \setminus \{u\}}(x) > 0 \]
+    pour $x > 2 \sqrt{d-1}$. D'autre part, 
+    \begin{align*}
+      x - \sum_{v \sim u}^{} \frac{\mu_{X \setminus \{u,v\}}(x)}{\mu_{X \setminus \{u\}}(x)}
+      &\geq x - \sum_{v\sim u}^{} \frac{1}{\sqrt{d-1}} \\
+      &> 2 \sqrt{d-1} - \sum_{v \sim
+        u}^{}\frac{1}{\sqrt{d-1}}\\
+      &\geq 2 \sqrt{d-1} - \frac{d}{\sqrt{d-1}} \\
+      &= \frac{2(d-1) - d}{\sqrt{d-1}} \\
+      &= \frac{d - 2}{\sqrt{d - 1}}\\
+        &\geq 0
+    \end{align*}
+    par l'hypothèse que $d \geq 2$.
   \end{enumerate}
 \end{preuve}
 
 
 
+\section{Expanseurs}
+\label{sec:expanseurs}
+
+Soit $X = (V, E)$ un graphe fini, connexe, $k$-régulier. Le \emph{\index{Laplacien}Laplacien (combinatoire)}
+de $X$ est l'application linéaire 
+\[ \Delta \colon \R V \to \R V, \ f \mapsto \Delta f \]
+où 
+\[ \Delta f(x) = k \cdot f(x) - \sum_{y \sim x}^{}f(y). \]
+Si $|V| = n$, alors 
+\[ \Delta = k \un_n - A \]
+On a vu que le spectre de $A$ est 
+\[ k = \mu_0 > \mu_1 \geq \cdots \geq \mu_{n-1} (\geq -k). \]
+Le spectre de $\Delta$ est 
+\[ 0 = \lambda_0 < \lambda_1 = k - \mu_1 \leq \lambda_2 = k - \mu_2 \leq \cdots \leq \lambda_{n-1} = k -
+  \mu_{n-1} (\leq 2k). \]
+On a 
+\[ \Delta f = 0 \iff kf = Af \iff \forall x \in V\ \colon \ kf(x) = \sum_{y \sim x}^{}f(y) \iff f(x) =
+  \frac{1}{k} \sum_{y \sim x}^{} f(y) \]
+(une fonction est harmonique ssi elle satisfait la propriété de la moyenne, c'àd qu'elle est égale à sa
+moyenne sur les voisins). On a vu que $\R V$ est l'ensemble des fonctions sur $V$ et $\R E$ est l'ensemble des
+fonctions sur $E$. Choisissons une orientation de $X$, c'àd pour chaque arête, on choisit l'origine $e^-$ et
+l'extrémité $e^+$. Grâce à ça, on a 
+\[ d\colon \R V \to \R E,\ f \mapsto df \]
+la \emph{\index{différentielle}différentielle} (ou \emph{\index{opérateur de cobord}opérateur de cobord} ou
+\emph{\index{opérateur aux différences}opérateur aux différences}) où 
+\[ d f(e) = f(e^+) - f(e^-). \]
+On voit facilement que 
+\[ df \equiv 0 \iff f \text{ est constante.} \]
+
+Pour $v$ un sommet, on note $e^+ = v$ les arêtes entrantes et $e^- = v$ les arêtes sortantes. On va définir la
+transposée de $d$ dans la proposition suivante.
+
+\begin{prop}
+  \begin{enumerate}
+  \item $d^t \colon \R E \to \R V$, $\xi \mapsto d^t \xi$ où
+    \[d^t \xi (v) = \sum_{e: e^+ = v}^{} \xi(e) - \sum_{e: e^- = v}^{} \xi(e).\]
+    
+  \item $\Delta = d^td$ (donc le Laplacien est indépendant de l'orientation).
+  \end{enumerate}
+\end{prop}
 
 
+\begin{rem}
+  Si on regarde \[\ker d^t = \left\{ \xi \in \R E \colon d^t \xi \equiv 0 \right\} = \left\{ \xi\ \colon\
+    \forall v \in V\ \sum_{e: e^+ = v}^{}\xi(e) - \sum_{e: e^- = v}^{}\xi(e) = 0 \right\},\] c'est exactement
+  la \index{première loi de Kirchoff}première loi de Kirchoff. Ainsi $\ker d^t$ est l'espace des
+  \emph{\index{flots}flots} sur $X$.
+\end{rem}
+
+\begin{preuve}
+  \begin{enumerate}
+  \item $d^t$ défini par, pour tout $f \in \R V$ et $\xi \in \R E$, alors 
+    \[ \left \langle d^t \xi\, ,\, f \right \rangle_V = \left \langle \xi\, ,\, d f \right \rangle_E. \]
+    On a 
+    \[ \left \langle f\, ,\, g \right \rangle_V := \sum_{v \in V}^{}f(v)g(v) \text{ et } \left \langle \xi\,
+        ,\, \eta \right \rangle_E := \sum_{e \in E}^{} \xi(e)\eta(e). \]
+    Ainsi 
+    \begin{align*}
+      \left \langle \sum_{e:e^+ = v}^{} \xi(e) - \sum_{e:e^- = v}^{} \xi(e)\, ,\, f \right
+      \rangle_V
+      &= \sum_{v \in V}^{} \left( \sum_{e^+=v}^{} \xi(e) \right)f(v) - \sum_{v \in V}^{} \left(\sum_{e^- =
+        v}^{} \xi(e)\right)f(v)\\
+      &= \sum_{e \in E}^{} \xi(e) \underbrace{\sum_{v: e^+ = v}^{} f(v)}_{=f(e^+)} - \sum_{e \in E}^{} \xi(e)
+        \underbrace{\sum_{v: e^- = v}^{}f(v)}_{=f(e^-)}\\
+      &= \sum_{e \in E}^{} \xi(e)\left( f(e^+) - f(e^-) \right)\\
+      &= \sum_{e \in E}^{} \xi(e) df(e)\\
+      &= \left \langle \xi\, ,\, df \right \rangle.
+    \end{align*}
+
+    
+  \item On a 
+    \begin{align*}
+      (d^td)(f)(v) = d^t(df)(v)
+      &= \sum_{e: e^+ = v}^{} df(e) - \sum_{e: e^- = v}^{} df(e)\\
+      &= \sum_{e: e^+ = v}^{}(f(e^+) - f(e^-)) - \sum_{e: e^- = v}^{}(f(e^+) - f(e^-))\\
+      &= \sum_{e: e^+ = v}^{}(f(v) - f(e^-)) + \sum_{e: e^- = v}^{}(f(v) - f(e^+))\\
+      &= k f(v) - \sum_{w \sim v}^{} f(w)\\
+      &= \Delta f(v)
+    \end{align*}
+    où l'avant-dernière égalité suit du fait qu'on a $k$ voisins de $v$ et qu'on les compte tous.
+  \end{enumerate}
+\end{preuve}
+
+\begin{exercice}[\index{quotient de \emph{Rayleigh}}quotient de \emph{Rayleigh}]
+  On a 
+  \[ \lambda_1 = \min\{\frac{\|df\|^2}{\|f\|^2},\ f \in \R V,\ f \neq 0,\ f \perp 1\} \]
+    où $f \perp 1$ signifie $\sum_{v \in V}^{} f(v) = 0$.
+\end{exercice}
 
 
+\paragraph{Interprétation du trou spectral}
 
+Soit $A \subset V$. Le \emph{\index{bord de $A$}bord de $A$}, noté $\partial A$ est l'ensemble des arêtes
+reliant $A$ à $V \setminus A$. C'est donc les arêtes qu'il faut enlever pour déconnecter $A$ de $V \setminus
+A$. Ainsi $\partial A = \partial (V \setminus A)$.
 
+\begin{defi}
+  La \emph{\index{constante isopérimétrique}constante isopérimétrique}, ou \emph{\index{constante de
+      \textsc{Cheeger}}constante de \textsc{Cheeger}} de $X$ est 
+  \[ h(X) = \min_{0 \neq |A| \leq \frac{|V|}{2}} \frac{|\partial A|}{|A|} \]
+\end{defi}
 
+La constante $h$ mesure la difficulté à déconnecter $X$, c'àd la robustesse de $X$ vu comme réseau de
+communication.
 
-
-
+\begin{ex}
+  \begin{enumerate}
+  \item Si $X = C_n$ est un cycle de longueur $n$, prenons $A$ un demi-cycle. Alors $|\partial A| = 2$, et
+    $|A| \sim \frac{n}{2}$. Alors 
+    \[ h(X) \leq \frac{2}{\frac{n}{2}} = \frac{4}{n} \xrightarrow{n \to \infty} 0. \]
+    
+  \item Si $X = K_n$ est le graphe complet sur $n$ sommets, alors $|\partial A| = |A|(n - |A|)$. Donc 
+    \[ h(X) = \min_{|A| \leq \frac{n}{2}} \frac{|A|(n - |A|)}{|A|} \sim \frac{n}{2}.  \]
+  \end{enumerate}
+\end{ex}
 
 
 
