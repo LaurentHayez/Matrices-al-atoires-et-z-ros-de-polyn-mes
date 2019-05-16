@@ -689,9 +689,62 @@ communication.
 \end{ex}
 
 
+\section{Inégalités de \textsc{Cheeger-Buser}}
 
+Soit $X$ un graphe fini, connexe, $k$-régulier. Alors 
+\begin{equation}
+  \label{eq:inegalite-cheeger-buser}
+  \frac{\lambda_1}{2} \leq h(X) \leq \sqrt{2k \lambda_1}.
+\end{equation}
+La première inégalité a été démontrée par \textsc{Alon-Milman} (1985), et la seconde par \textsc{Dodziuk}
+(1984). On les appelle \og inégalités de Cheeger-Buser\fg{} par analogie avec la géométrie Riemannienne~; si
+$\mathcal{M}$ est une variété Riemannienne compacte, connexe, le Laplacien $ \Delta = d^\ast d  $ a comme
+spectre une suite de valeurs propres 
+\[ 0 = \lambda_0 < \lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n \leq \cdots , \]
+avec $\lim_{n \to \infty} \lambda_n = + \infty$. Cheeger a également défini une constante isopérimétrique pour
+les variétés ($\sim$ 1970), notée $h(\mathcal{M})$, et a démontré l'analogue la première inégalité de
+l'équation \eqref{eq:inegalite-cheeger-buser}, tandis que P. Buser (1974) a démontré l'analogue de la seconde.
 
+\begin{defi}
+  Une famille $(X_n)_{n>0}$ de graphes finis, connexes, $k$-réguliers avec $\lim_{n \to \infty} |X_n|=+\infty$
+  est une \emph{\index{famille d'expanseurs}famille d'expanseurs} s'il existe $\epsilon > 0$ tel que pour tout $n \geq 1$,
+  \[ h(X_n) \geq \epsilon. \]
+\end{defi}
 
+Ainsi, via l'équation \eqref{eq:inegalite-cheeger-buser} c'est équivalent à dire qu'il existe $\epsilon' > 0$
+tel que $\lambda_1(X_n) \geq \epsilon'$ pour tout $n \geq 1$.
+
+Les expanseurs sont des familles de graphes qui jouent un rôle important en informatique, mais aussi en
+mathématiques. Les familles de graphes de Ramanujan sont des familles d'expanseurs optimales du point de vue
+spectral (plus grand trou spectral possible). La simple existence de familles de graphes expanseurs est non
+triviale. La première preuve par \textsc{Pinsker} ($\sim$ 1970) utilise des méthodes de comptage. Pinsker a
+montré que pour $k, \epsilon > 0$ fixés, parmis tous les graphes connexes finis $k$-réguliers sur $n$
+sommets, la proportion de ceux avec $h(X) \geq \epsilon$ tend vers $1$ pour $n \to \infty$. C'est une preuve
+d'existence, pas explicite.
+
+La première construction explicite est dûe à G. \textsc{Margulis} (Fields 1978). En 1973, il montre que pour
+$S$ une partie génératrice finie, symétrique de $SL_3(\Z)$, alors la famille 
+\[ \left( Cay(SL_3(\Z / n \Z), S) \right)_{n > 1} \]
+est une famille de graphes connexes. Le groupe $SL_3(\Z)$ est engendré par 
+\[
+  \begin{pmatrix}
+    1 & 1 & 0\\
+    0 & 1 & 0\\
+    0 & 0 & 1
+  \end{pmatrix}^{\pm 1}
+  \text{ et }
+  \begin{pmatrix}
+    0 & 1 & 0\\
+    0 & 0 & 1\\
+    1 & 0 & 0
+  \end{pmatrix}^{\pm 1}.
+\]
+On obtient donc une famille explicite d'expanseurs $4$-réguliers.
+
+En 1986, \textsc{Lubotzky-Phillips-Sarnak} d'une part et \textsc{Margulis} d'autre part donnent les premiers
+exemples explicites de familles de graphe de Ramanujan. La construction suit la même idée, ce sont des graphes
+de Cayley de quotients finis d'un même groupe infini. C'est l'estimation du trou spectral qui demande de la
+théorie des nombres difficile.
 
 
 
